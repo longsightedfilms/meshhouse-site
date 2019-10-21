@@ -1,0 +1,52 @@
+.App {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.view-margin {
+  margin-top: 4.5rem;
+}
+
+.navbar-brand img {
+  height: 1.5rem;
+}
+
+.jumbotron {
+  border-radius: 0;
+}
+
+.models-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+#nprogress .bar{
+  top: 68px;
+  height: 0.2rem;
+}
+
+#nprogress .peg{
+  box-shadow: none;
+}
+
+#nprogress .spinner{
+  top: 85px;
+}
+
+#nprogress .spinner-icon{
+  width: 2rem;
+  height: 2rem;
+  border-width: 0.2rem;
+}
+
+@media (max-width: 575px) {
+  .navbar-brand {
+    margin-right: 0;
+  }
+  .navbar-brand img {
+    height: 1.1rem;
+  }
+}
