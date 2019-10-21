@@ -21,6 +21,52 @@
   grid-template-columns: 1fr 300px;
   padding: 0 1rem;
   gap: 1rem;
+  align-items: flex-start;
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: 400px;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.model-dccs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.model-dccs img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.model-dccs img:last-child {
+  margin-bottom: 0;
+}
+
+.model-view__nav-link {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.model-view__nav-link img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
 }
 
 #nprogress .bar{
