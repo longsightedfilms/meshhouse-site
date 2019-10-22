@@ -2,6 +2,10 @@ import loadable from "@loadable/component"
 
 const routes = [
   {
+    path: '/application',
+    component: loadable(() => import('./Views/Application'))
+  },
+  {
     path: '/terms-of-use',
     component: loadable(() => import('./Views/TermsOfUse'))
   },

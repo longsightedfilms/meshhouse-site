@@ -19,31 +19,32 @@ class Models extends React.PureComponent<any> {
       category: category,
       page: page
     }
-    console.log(new Date().getTime())
-    this.props.fetchModelsFromDB(params).then(() => {
-      console.log(this.props)
-    })
+    this.props.fetchModelsFromDB(params)
   }
 
   render() {
+    const isLoaded = this.props.loaded
+    const category = this.props.match.params.category
+    const page = this.props.pageData
+
     return (
       <React.Fragment>
         <Jumbotron className="text-center" fluid>
-          {this.props.match.params.category !== undefined &&
+          {category !== undefined &&
             <React.Fragment>
               <h1>Models catalog</h1>
-              <p className="lead">Category - {categories[this.props.match.params.category]}</p>
+              <p className="lead">Category - {categories[category]}</p>
             </React.Fragment>
           }
-          {this.props.match.params.category === undefined &&
+          {category === undefined &&
             <h1>Models catalog</h1>
           }
         </Jumbotron>
-        {this.props.pageData.length !== 0 &&
+        {isLoaded &&
           <div className="models-container">
             <div className="models-grid">
-              {this.props.pageData.models !== undefined &&
-                this.props.pageData.models.map((item: any) =>
+              {page.models.length > 0 &&
+                page.models.map((item: any) =>
                   <Card key={item.index}>
                     <NavLink to={`/models/view/${item.slug}`}>
                       <CardImg top width="100%" src={getImageLink(item.variations[0].thumbnail)} alt={item.name} />
@@ -63,19 +64,24 @@ class Models extends React.PureComponent<any> {
                     </CardBody>
                   </Card>
                 )}
+              {page.models.length === 0 &&
+                <Card>
+                  <CardBody>
+                    <CardTitle tag="h1">Models not found <span role="img" aria-label="sad face">😞</span></CardTitle>
+                  </CardBody>
+                </Card>
+              }
             </div>
             <React.Fragment>
               <Card>
                 <CardBody>
                   <h3>Categories:</h3>
                   <ul className="list-unstyled">
-                    {this.props.pageData.categories !== undefined &&
-                      this.props.pageData.categories.map((item: any) =>
-                        <li key={item.index}>
-                          <NavLink to={`/models/${item.categorySlug}`}>{`${item.categoryName.en} [${item.modelsCount}]`}</NavLink>
-                        </li>
-                      )
-                    }
+                    {page.categories.map((item: any) =>
+                      <li key={item.index}>
+                        <NavLink to={`/models/${item.categorySlug}`}>{`${item.categoryName.en} [${item.modelsCount}]`}</NavLink>
+                      </li>
+                    )}
                   </ul>
                 </CardBody>
               </Card>
@@ -87,7 +93,7 @@ class Models extends React.PureComponent<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ pageData: state.models })
+const mapStateToProps = (state: any) => ({ loaded: state.loaded, pageData: state.models })
 
 export default connect(
   mapStateToProps,

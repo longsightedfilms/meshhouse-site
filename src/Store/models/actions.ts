@@ -1,38 +1,23 @@
 import { SET_MODELS_DATA, SET_SINGLE_MODEL } from './types'
-import axios from 'axios'
+import { setLoadingStatus } from '../loading/actions'
+import { fetchAPI } from '../../Functions/Helpers'
 
 export function fetchModelsFromDB(params: any) {
   return function (dispatch: any) {
-    return axios({
-      method: "POST",
-      url: "http://172.16.1.45/backend/api/v1",
-      data: {
-        "jsonrpc": "2.0",
-        "method": "models.get",
-        "params": params,
-        "id": 1
-      },
-      responseType: "json",
-    }).then((response) => {
+    dispatch(setLoadingStatus(false))
+    return fetchAPI('models.get', params).then((response) => {
       dispatch(setModelsData(response.data.result))
+      dispatch(setLoadingStatus(true))
     })
   }
 }
 
 export function fetchSingleModel(slug: string) {
   return function (dispatch: any) {
-    return axios({
-      method: "POST",
-      url: "http://172.16.1.45/backend/api/v1",
-      data: {
-        "jsonrpc": "2.0",
-        "method": "models.get.single",
-        "params": [slug],
-        "id": 1
-      },
-      responseType: "json",
-    }).then((response) => {
+    dispatch(setLoadingStatus(false))
+    return fetchAPI('models.get.single', [slug]).then((response) => {
       dispatch(setModelPageData(response.data.result))
+      dispatch(setLoadingStatus(true))
     })
   }
 }

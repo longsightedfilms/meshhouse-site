@@ -8,7 +8,8 @@ const Header = (props: any) => {
     { to: '', title: 'Home' },
     { to: '/models', title: 'Models' },
     //{ to: '/how-to-use', title: 'How to use models' },
-    { to: '/terms-of-use', title: 'Terms of use' }
+    { to: '/terms-of-use', title: 'Terms of use' },
+    { to: '/application', title: 'Application' }
   ]
   const [isOpen, setIsOpen] = useState(false)
 
