@@ -1,11 +1,14 @@
 import React from 'react'
+import qs from 'qs'
 import { connect } from 'react-redux'
 import { fetchModelsFromDB } from '../Store/models/actions'
+import { renderToStaticMarkup } from "react-dom/server"
+import { withLocalize } from "react-localize-redux"
 import { NavLink } from "react-router-dom"
 import { Card, CardBody, CardImg, CardText, CardTitle, Jumbotron } from 'reactstrap'
-import { categories, getImageLink, getDccIcon } from '../Functions/Helpers'
+import { getImageLink, getDccIcon } from '../Functions/Helpers'
 import { format } from 'date-fns'
-import qs from 'qs'
+import { Translate } from "react-localize-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Models extends React.PureComponent<any> {
@@ -20,32 +23,36 @@ class Models extends React.PureComponent<any> {
       page: page
     }
     this.props.fetchModelsFromDB(params)
+    document.title = this.props.translate('pages.models.title') + ` - Meshhouse`
   }
 
   render() {
     const isLoaded = this.props.loaded
-    const category = this.props.match.params.category
     const page = this.props.pageData
+    const lang = this.props.activeLanguage !== undefined ? this.props.activeLanguage.code : "en"
+    const category = isLoaded === true && this.props.match.params.category !== undefined ? page.categories.find((item: any) => {
+      return item.categorySlug === this.props.match.params.category
+    }).categoryName[lang] : undefined
 
     return (
       <React.Fragment>
         <Jumbotron className="text-center" fluid>
           {category !== undefined &&
             <React.Fragment>
-              <h1>Models catalog</h1>
-              <p className="lead">Category - {categories[category]}</p>
+              <h1><Translate id="pages.models.title" /></h1>
+              <p className="lead"><Translate id="pages.models.category" data={{ category: category }} /></p>
             </React.Fragment>
           }
           {category === undefined &&
-            <h1>Models catalog</h1>
+            <h1><Translate id="pages.models.title" /></h1>
           }
         </Jumbotron>
-        {isLoaded &&
+        {isLoaded && page.models !== undefined &&
           <div className="models-container">
             <div className="models-grid">
-              {page.models.length > 0 &&
+              { page.models.length > 0 &&
                 page.models.map((item: any) =>
-                  <Card key={item.index}>
+                  <Card key={item.id}>
                     <NavLink to={`/models/view/${item.slug}`}>
                       <CardImg top width="100%" src={getImageLink(item.variations[0].thumbnail)} alt={item.name} />
                       <div className="model-dccs">
@@ -67,7 +74,7 @@ class Models extends React.PureComponent<any> {
               {page.models.length === 0 &&
                 <Card>
                   <CardBody>
-                    <CardTitle tag="h1">Models not found <span role="img" aria-label="sad face">😞</span></CardTitle>
+                  <CardTitle tag="h1"><Translate id="pages.models.notFound" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></CardTitle>
                   </CardBody>
                 </Card>
               }
@@ -75,11 +82,11 @@ class Models extends React.PureComponent<any> {
             <React.Fragment>
               <Card>
                 <CardBody>
-                  <h3>Categories:</h3>
+                  <h3><Translate id="pages.models.categories" /></h3>
                   <ul className="list-unstyled">
                     {page.categories.map((item: any) =>
-                      <li key={item.index}>
-                        <NavLink to={`/models/${item.categorySlug}`}>{`${item.categoryName.en} [${item.modelsCount}]`}</NavLink>
+                      <li key={item.id}>
+                        <NavLink to={`/models/${item.categorySlug}`}>{`${item.categoryName[lang]} [${item.modelsCount}]`}</NavLink>
                       </li>
                     )}
                   </ul>
@@ -95,7 +102,7 @@ class Models extends React.PureComponent<any> {
 
 const mapStateToProps = (state: any) => ({ loaded: state.loaded, pageData: state.models })
 
-export default connect(
+export default withLocalize(connect(
   mapStateToProps,
   { fetchModelsFromDB }
-)(Models)
+)(Models))

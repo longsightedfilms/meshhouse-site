@@ -4,6 +4,7 @@ import { fetchSingleModel } from '../Store/models/actions'
 import { Jumbotron, Container, Row, Col, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button } from 'reactstrap'
 import { getImageLink, getDccIcon, getStringedArray, stringCapitalize } from '../Functions/Helpers'
 import { format } from 'date-fns'
+import { Translate } from "react-localize-redux"
 import classnames from 'classnames'
 
 class Model extends React.PureComponent<any, any> {
@@ -16,7 +17,9 @@ class Model extends React.PureComponent<any, any> {
 
   componentDidMount() {
     const slug = this.props.match.params.slug
-    this.props.fetchSingleModel(slug)
+    this.props.fetchSingleModel(slug).then(() => {
+      document.title = `${this.props.pageData[0].name} - Meshhouse`
+    })
   }
 
   handleTabToggle(index: number) {
@@ -55,53 +58,53 @@ class Model extends React.PureComponent<any, any> {
                 <Container>
                   <Row>
                     <Col lg={7}>
-                      <img src={getImageLink(item.thumbnail)} alt="" />
+                      <img src={getImageLink(item.thumbnail)} alt={model.name} />
                     </Col>
                     <Col lg={5}>
                       <Table bordered>
                         <tbody>
                           <tr>
-                            <th>Software version:</th>
+                            <th><Translate id="pages.model.dccVersion" /></th>
                             <td>{item.dccVersion}</td>
                           </tr>
                           <tr>
-                            <th>Archive size (with model):</th>
+                            <th><Translate id="pages.model.size" /></th>
                             <td>{item.size}</td>
                           </tr>
                           <tr>
-                            <th>Upload date:</th>
+                            <th><Translate id="pages.model.date" /></th>
                             <td>{format(model.date, 'dd.MM.yyyy')}</td>
                           </tr>
                           <tr>
-                            <th>Polys:</th>
+                            <th><Translate id="pages.model.polys" /></th>
                             <td>{item.polys}</td>
                           </tr>
                           <tr>
-                            <th>Verts:</th>
+                            <th><Translate id="pages.model.verts" /></th>
                             <td>{item.verts}</td>
                           </tr>
                           <tr>
-                            <th>Hair & fur:</th>
+                            <th><Translate id="pages.model.hairFur" /></th>
                             <td>{item.hairFur}</td>
                           </tr>
                           <tr>
-                            <th>Morpher / blendshapes:</th>
+                            <th><Translate id="pages.model.morpher" /></th>
                             <td>{String(item.morpher)}</td>
                           </tr>
                           <tr>
-                            <th>Skinning:</th>
+                            <th><Translate id="pages.model.skinning" /></th>
                             <td>{item.skinning}</td>
                           </tr>
                           <tr>
-                            <th>Renderers:</th>
+                            <th><Translate id="pages.model.renderers" /></th>
                             <td>{getStringedArray(item.renderers)}</td>
                           </tr>
                           <tr>
-                            <th>Textures:</th>
+                            <th><Translate id="pages.model.textures" /></th>
                             <td>{stringCapitalize(item.textures)}</td>
                           </tr>
                           <tr>
-                            <th colSpan={2} className="text-center bg-secondary text-light">Download links:</th>
+                            <th colSpan={2} className="text-center bg-secondary text-light"><Translate id="pages.model.links" /></th>
                           </tr>
                           <tr>
                             <th colSpan={2}>
@@ -111,7 +114,7 @@ class Model extends React.PureComponent<any, any> {
                                   block
                                   disabled
                                 >
-                                  Textures not needed
+                                  <Translate id="pages.model.linksTexProc" />
                                 </Button>
                               }
                               {item.links.textures !== null &&
@@ -122,7 +125,7 @@ class Model extends React.PureComponent<any, any> {
                                   block
                                   disabled
                                 >
-                                  Download textures
+                                  <Translate id="pages.model.linksTex" />
                                 </Button>
                               }
                             </th>
@@ -135,7 +138,7 @@ class Model extends React.PureComponent<any, any> {
                                 href={item.links.model}
                                 block
                               >
-                                Download model
+                                <Translate id="pages.model.linksModel" />
                               </Button>
                             </th>
                           </tr>

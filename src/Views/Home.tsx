@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { renderToStaticMarkup } from "react-dom/server"
+import { Translate, withLocalize } from "react-localize-redux"
 import { Jumbotron } from 'reactstrap'
 
 const Home = (props: any) => {
+  useEffect(() => {
+    document.title = 'Meshhouse - ' + props.translate('pages.home.title')
+  })
+  
   return (
     <div>
-      <Jumbotron className="text-center" fluid>
-        <h1>3d models catalog, free for commercial use</h1>
-        <p className="lead text-uppercase">Alpla test</p>
+      <Jumbotron className="jumbotron-home" fluid>
+        <h1><Translate id="pages.home.title" /></h1>
+        <p className="lead text-uppercase"><Translate id="pages.home.description" /></p>
+        <p className="jumbotron-courtesy"><Translate id="pages.home.link" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></p>
       </Jumbotron>
     </div>
   )
 }
 
-export default Home
+export default withLocalize(Home)

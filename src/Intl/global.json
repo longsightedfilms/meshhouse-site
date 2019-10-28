@@ -1,0 +1,44 @@
+{
+  "language": ["Language", "Язык"],
+  "navigation": {
+    "home": ["Home", "Главная"],
+    "models": ["Models", "Модели"],
+    "tos": ["Terms of use", "Условия использования"],
+    "application": ["Application", "Приложение"]
+  },
+  "pages": {
+    "home": {
+      "title": ["3d models catalog, free for commercial use", "Каталог 3d моделей, бесплатно для коммерческого использования"],
+      "description": ["Alpha test", "Альфа тест"],
+      "link": [
+        "Courtesy of <a href='https://pixabay.com/en/users/enriquelopezgarre-3764790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>enriquelopezgarre</a> from <a href='https://pixabay.com/en/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>Pixabay</a>",
+        "Изображение <a href='https://pixabay.com/ru/users/enriquelopezgarre-3764790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>enriquelopezgarre</a> с сайта <a href='https://pixabay.com/ru/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>Pixabay</a>"
+      ]
+    },
+    "models": {
+      "title": ["Models catalog", "Каталог моделей"],
+      "category": ["Category - ${category}", "Категория - ${category}"],
+      "categories": ["Categories:", "Категории:"],
+      "notFound": [
+        "Models not found <span role='img' aria-label='sad face'>😞</span>", 
+        "Модели не найдены <span role='img' aria-label='sad face'>😞</span>"
+      ]
+    },
+    "model": {
+      "dccVersion": ["Software version:", "Версия ПО:"],
+      "size": ["Archive size (with model):", "Вес архива (с моделью):"],
+      "date": ["Upload date:", "Дата загрузки:"],
+      "polys": ["Polys:", "Полигонов:"],
+      "verts": ["Verts:", "Вершин:"],
+      "hairFur": ["Hair & fur:", "Система волос/меха:"],
+      "morpher": ["Morpher / blendshapes:", "Вершинная анимация:"],
+      "skinning": ["Skinning:", "Скетелная анимация:"],
+      "renderers": ["Renderers:", "Рендереры:"],
+      "textures": ["Textures:", "Текстуры:"],
+      "links": ["Download links:", "Ссылки на скачивание:"],
+      "linksTexProc": ["Textures not needed", "Текстуры не нужны"],
+      "linksTex": ["Download textures", "Скачать текстуры"],
+      "linksModel": ["Download model", "Скачать модель"]
+    }
+  }
+}

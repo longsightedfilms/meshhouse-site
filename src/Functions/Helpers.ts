@@ -8,9 +8,6 @@ import blender from '../Assets/icons/blender.svg'
 import c4d from '../Assets/icons/cinema4d.svg'
 import houdini from '../Assets/icons/houdini.svg'
 
-export const categories: any = {
-  electronics: "Electronics"
-}
 export const SITE_URL = 'http://172.16.1.45/'
 
 export function getImageLink(url: string) {
