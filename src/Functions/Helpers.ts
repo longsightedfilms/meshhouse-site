@@ -8,10 +8,11 @@ import blender from '../Assets/icons/blender.svg'
 import c4d from '../Assets/icons/cinema4d.svg'
 import houdini from '../Assets/icons/houdini.svg'
 
-export const SITE_URL = process.env.NODE_ENV === 'development' ? 'http://172.16.1.45/' : 'https://meshhouse.ml'
+export const isDev = process.env.NODE_ENV === 'development'
+export const SITE_URL = isDev ? 'http://172.16.1.45/' : 'https://meshhouse.ml/'
 
-export function getImageLink(url: string) {
-  return `${SITE_URL}upload/thumbnails/${url}`
+export function getImageLink(url: string): string {
+  return SITE_URL + (isDev ? 'backend/' : '') + `upload/thumbnails/${url}`
 }
 
 export function getDccIcon(item: any) {
@@ -35,11 +36,11 @@ export function getDccIcon(item: any) {
   return { name: names[dcc], icon: icons[dcc] }
 }
 
-export function stringCapitalize(string: string) {
+export function stringCapitalize(string: string): string  {
   return string.substr(0, 1).toUpperCase() + string.substr(1)
 }
 
-export function getStringedArray(array: string[]) {
+export function getStringedArray(array: string[]): string  {
   let string = ''
   array.forEach((item, index) => {
     string += stringCapitalize(item)
@@ -50,7 +51,7 @@ export function getStringedArray(array: string[]) {
   return string
 }
 
-export function fetchAPI(method: string, params: any) {
+export function fetchAPI(method: string, params: any): Promise<any> {
   return axios({
     method: "POST",
     url: `${SITE_URL}backend/api/v1`,
