@@ -1,13 +1,12 @@
 import React from 'react'
+import { Translate } from "react-localize-redux"
 
 const PrivacyPolicy = () => {
   return (
     <React.Fragment>
-      <h2>Privacy policy</h2>
+      <h2><Translate id="pages.tos.privacyTitle" /></h2>
       <hr className="mb-2" />
-      <p>
-        We don't collect any data. Comma. We think that collecting user data as monetization strategy is a no-way.
-      </p>
+      <p><Translate id="pages.tos.privacyText" /></p>
     </React.Fragment>
   )
 }

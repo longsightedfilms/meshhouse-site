@@ -1,9 +1,10 @@
 import React from 'react'
+import { Translate } from "react-localize-redux"
 
 const UseContent = () => {
   return (
     <React.Fragment>
-      <h2>Use of Content</h2>
+      <h2><Translate id="pages.tos.useContentTitle" /></h2>
       <hr className="mb-2" />
       <p>Content downloaded may be used for personal and commercial use (provided the use is in compliance with these terms and conditions).</p>
       <p>You are permitted to:</p>

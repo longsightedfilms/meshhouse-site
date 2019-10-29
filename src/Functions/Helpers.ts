@@ -8,7 +8,7 @@ import blender from '../Assets/icons/blender.svg'
 import c4d from '../Assets/icons/cinema4d.svg'
 import houdini from '../Assets/icons/houdini.svg'
 
-export const SITE_URL = 'http://172.16.1.45/'
+export const SITE_URL = process.env.NODE_ENV === 'development' ? 'http://172.16.1.45/' : 'https://meshhouse.ml'
 
 export function getImageLink(url: string) {
   return `${SITE_URL}upload/thumbnails/${url}`

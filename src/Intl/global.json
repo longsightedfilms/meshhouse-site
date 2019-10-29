@@ -7,9 +7,32 @@
     "application": ["Application", "Приложение"]
   },
   "pages": {
+    "application": {
+      "title": ["Meshhouse application", "Приложение Meshhouse"],
+      "lead": [
+        "Meshhouse - open-source 3D catalogizer program, built with Electron. <b>100% optional</b>", 
+        "Meshhouse - галерея 3D моделей с открытым исходным кодом, сделанный на Electron. <b>100% опционально</b>"
+      ],
+      "featureTitle": ["Features:", "Возможности:"],
+      "featureList": [
+        "<li><p class='mb-0'>Meshhouse integration*</p></li><li><p class='mb-0'>Adding custom catalogs (grid and table view)</p></li><li><p class='mb-0'>Filter through your models collection</p></li><li><p class='mb-0'>Localization support</p></li>", 
+        "<li><p class='mb-0'>Интеграция с сервисом Meshhouse*</p></li><li><p class='mb-0'>Добавление своих каталогов моделей (вид сеткой и таблицей)</p></li><li><p class='mb-0'>Сортируйте модели в вашей коллекции</p></li><li><p class='mb-0'>Поддержка локализации</p></li>"
+      ],
+      "note": ["* - currently not implemented.", "* - пока не реализовано."],
+      "platforms": ["Supported platforms:", "Поддерживаемые платформы:"],
+      "platformWin": ["Windows 7-10 (x64 only)", "Windows 7-10 (только x64)"],
+      "platformMac": ["MacOS 10.10 Yosemite and newer", "MacOS 10.10 Yosemite и новее"],
+      "platformLinux": ["Ubuntu 12.04, Fedora 21, Debian 8 and newer", "Ubuntu 12.04, Fedora 21, Debian 8 и новее"],
+      "localize": ["Localizations:", "Локализации:"],
+      "status": [
+        "Currently in development, but you can build application by own:",
+        "На данный момент программа в разработке, но вы можете собрать приложение самому:"
+      ],
+      "link": ["Github repo", "Репозиторий Github"]
+    },
     "home": {
       "title": ["3d models catalog, free for commercial use", "Каталог 3d моделей, бесплатно для коммерческого использования"],
-      "description": ["Alpha test", "Альфа тест"],
+      "description": ["Alpha test (with demo database)", "Альфа тест (с демонстрационной базой данных)"],
       "link": [
         "Courtesy of <a href='https://pixabay.com/en/users/enriquelopezgarre-3764790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>enriquelopezgarre</a> from <a href='https://pixabay.com/en/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>Pixabay</a>",
         "Изображение <a href='https://pixabay.com/ru/users/enriquelopezgarre-3764790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>enriquelopezgarre</a> с сайта <a href='https://pixabay.com/ru/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>Pixabay</a>"
@@ -39,6 +62,29 @@
       "linksTexProc": ["Textures not needed", "Текстуры не нужны"],
       "linksTex": ["Download textures", "Скачать текстуры"],
       "linksModel": ["Download model", "Скачать модель"]
+    },
+    "tos": {
+      "title": [
+        "Terms of use, privacy policy, DMCA",
+        "Условия использования, политика конфиденциальности, DMCA"
+      ],
+      "summary": ["Summary", "В кратце"],
+      "summaryList": [
+        "<dt>Website</dt><dd>Meshhouse.ml (or any TLD) is a website that offers a library of different sorts of 3D models (the 'Content')</dd>",
+        "<dt>Сайт</dt><dd>Meshhouse.ml (или другой домен третьего уровня) - это сайт, предлагающий библиотеку различных 3D моделей ('Контент')</dd>"
+      ],
+      "note": ["Text partially available in other languages.", "Текст частично доступен только на английском языке."],
+      "useContentTitle": ["Use of Content", "Использование Контента"],
+      "privacyTitle": ["Privacy policy", "Политика конфиденциальности"],
+      "privacyText": [
+        "We don't collect any data. Comma. We think that collecting user data as monetization strategy is a no-way.",
+        "Мы не собираем пользовательские данные. Точка. Мы считаем, что сбор пользовательских данных для их монетизации - это путь вникуда."
+      ],
+      "dmcaTitle": ["DMCA and site content", "Закон об авторских правах и Контент сайта"],
+      "dmcaText": [
+        "All models on this site made from scratch, not basing on existing models. We can use other model as reference, but even in this case, model would be made from scratch. If you think, that model violates copyrights, you can send message to <a href='mailto:social@longsightedfilms.com'>our email</a> and we delete model.",
+        "Все модели на этом сайте сделаны с нуля, не базируясь на уже существующих моделях. Мы можем использовать другую модель как референс, но даже в этом случае модель всё равно будет сделана с нуля. Если вы считаете, что модель нарушает авторские права, вы можете отправить сообщение на <a href='mailto:social@longsightedfilms.com'>нашу почту</a> и мы удалим модель."
+      ]
     }
   }
 }

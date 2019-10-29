@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch } from "react-router-dom"
+import { Scrollbars } from 'react-custom-scrollbars'
 import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
 import globalTranslations from "./Intl/global.json"
@@ -50,16 +51,18 @@ class App extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="App">
-        <Header />
-        <div className="view-margin">
-          <Switch>
-            {routes.map((route, i) =>
-              <NRoute key={i} {...route} />
-            )}
-          </Switch>
+      <Scrollbars autoHide autoHeight autoHeightMax={'100vh'}>
+        <div className="App">
+          <Header />
+          <div className="view-margin">
+            <Switch>
+              {routes.map((route, i) =>
+                <NRoute key={i} {...route} />
+              )}
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Scrollbars>
     )
   }
 }

@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Jumbotron, Container, Row, Col } from 'reactstrap'
+import { Translate, withLocalize } from "react-localize-redux"
+import { renderToStaticMarkup } from "react-dom/server"
 import UseContent from './TOS/UseContent'
 import PrivacyPolicy from './TOS/PrivacyPolicy'
 import DMCA from './TOS/DMCA'
 
 const TermsOfUse = (props: any) => {
+  useEffect(() => {
+    document.title = props.translate('pages.tos.title') + ' - Meshhouse'
+  })
+
   return (
     <div>
       <Jumbotron className="text-center" fluid>
-        <h1>Terms of use, privacy policy, DMCA</h1>
+        <h1><Translate id="pages.tos.title" /></h1>
       </Jumbotron>
       <Container>
         <Row>
           <Col>
-            <h2>Summary</h2>
-            <dl>
-              <dt>Website</dt>
-              <dd>Meshhouse.ml (or any TLD) is a website that offers a library of different sorts of 3D models (the "Content")</dd>
-            </dl>
+            <h2><Translate id="pages.tos.summary" /></h2>
+            <p><Translate id="pages.tos.note" /></p>
+            <dl><Translate id="pages.tos.summaryList" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></dl>
             <hr className="mb-2"/>
             <UseContent />
             <PrivacyPolicy />
@@ -29,4 +33,4 @@ const TermsOfUse = (props: any) => {
   )
 }
 
-export default TermsOfUse
+export default withLocalize(TermsOfUse)
