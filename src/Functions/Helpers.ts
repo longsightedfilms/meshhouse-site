@@ -12,7 +12,7 @@ export const isDev = process.env.NODE_ENV === 'development'
 export const SITE_URL = isDev ? 'http://172.16.1.45/' : 'https://meshhouse.ml/'
 
 export function getImageLink(url: string): string {
-  return SITE_URL + (isDev ? 'backend/' : '') + `upload/thumbnails/${url}`
+  return SITE_URL + (!isDev ? 'backend/' : '') + `upload/thumbnails/${url}`
 }
 
 export function getDccIcon(item: any) {

@@ -1,17 +1,18 @@
 import React from 'react'
 import qs from 'qs'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { fetchModelsFromDB } from '../Store/models/actions'
 import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
 import { NavLink } from "react-router-dom"
-import { Card, CardBody, CardImg, CardText, CardTitle, Jumbotron } from 'reactstrap'
-import { getImageLink, getDccIcon } from '../Functions/Helpers'
-import { format } from 'date-fns'
+import { Card, CardBody, CardTitle, Jumbotron } from 'reactstrap'
 import { Translate } from "react-localize-redux"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { trackWindowScroll } from 'react-lazy-load-image-component'
 
-class Models extends React.PureComponent<any> {
+import ModelCard from '../Components/Models/Card'
+
+class Models extends React.PureComponent<any, any> {
   componentDidMount() {
     let category = this.props.match.params.category
     let page = qs.parse(this.props.location.search.substr(1)).page
@@ -50,37 +51,20 @@ class Models extends React.PureComponent<any> {
         {isLoaded && page.models !== undefined &&
           <div className="models-container">
             <div className="models-grid">
-              { page.models.length > 0 &&
+              {page.models.length > 0 &&
                 page.models.map((item: any) =>
-                  <Card key={item.id}>
-                    <NavLink to={`/models/view/${item.slug}`}>
-                      <CardImg top width="100%" src={getImageLink(item.variations[0].thumbnail)} alt={item.name} />
-                      <div className="model-dccs">
-                        {item.variations.map((variation: any, index: number) =>
-                          <img key={index} src={getDccIcon(variation).icon} alt={variation.dcc} />
-                        )}
-                      </div>
-                    </NavLink>
-                    <CardBody>
-                      <CardTitle tag="h3">{item.name}</CardTitle>
-                      <CardText>
-                        <small className="text-muted">
-                          <FontAwesomeIcon icon="calendar-alt" /> {format(item.date, 'dd.MM.yyyy')}
-                        </small>
-                      </CardText>
-                    </CardBody>
-                  </Card>
+                  <ModelCard key={item.id} item={item} scrollPosition={this.props.scrollPosition} />
                 )}
               {page.models.length === 0 &&
                 <Card>
                   <CardBody>
-                  <CardTitle tag="h1"><Translate id="pages.models.notFound" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></CardTitle>
+                    <CardTitle tag="h1"><Translate id="pages.models.notFound" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></CardTitle>
                   </CardBody>
                 </Card>
               }
             </div>
             <React.Fragment>
-              <Card>
+              <Card className="models-categories">
                 <CardBody>
                   <h3><Translate id="pages.models.categories" /></h3>
                   <ul className="list-unstyled">
@@ -102,7 +86,8 @@ class Models extends React.PureComponent<any> {
 
 const mapStateToProps = (state: any) => ({ loaded: state.loaded, pageData: state.models })
 
-export default withLocalize(connect(
-  mapStateToProps,
-  { fetchModelsFromDB }
-)(Models))
+export default compose<any>(
+  trackWindowScroll,
+  withLocalize,
+  connect(mapStateToProps, { fetchModelsFromDB })
+)(Models)

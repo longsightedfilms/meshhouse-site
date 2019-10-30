@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Switch } from "react-router-dom"
-import { Scrollbars } from 'react-custom-scrollbars'
 import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
 import globalTranslations from "./Intl/global.json"
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'nprogress/nprogress.css'
-import './Styles/App.css'
-
 import Header from './Components/Header'
-// Views
 import routes from './Routes'
 import NRoute from './Components/NRoute'
+import CustomScrollbar from './Components/CustomScrollbar'
+import './Styles/App.sass'
 
 class App extends React.Component<any, any> {
   constructor(props: any) {
@@ -36,10 +32,8 @@ class App extends React.Component<any, any> {
   }
 
   componentDidUpdate(prevProps: any) {
-    const prevLangCode =
-      prevProps.activeLanguage && prevProps.activeLanguage.code;
-    const curLangCode =
-      this.props.activeLanguage && this.props.activeLanguage.code;
+    const prevLangCode = prevProps.activeLanguage && prevProps.activeLanguage.code
+    const curLangCode = this.props.activeLanguage && this.props.activeLanguage.code
 
     const hasLanguageChanged = prevLangCode !== curLangCode;
 
@@ -51,18 +45,20 @@ class App extends React.Component<any, any> {
 
   render() {
     return (
-      <Scrollbars autoHide autoHeight autoHeightMax={'100vh'}>
+      <CustomScrollbar>
         <div className="App">
           <Header />
           <div className="view-margin">
-            <Switch>
-              {routes.map((route, i) =>
-                <NRoute key={i} {...route} />
-              )}
-            </Switch>
+            <Suspense fallback={null}>
+              <Switch>
+                {routes.map((route, i) =>
+                  <NRoute key={i} {...route} />
+                )}
+              </Switch>
+            </Suspense>
           </div>
         </div>
-      </Scrollbars>
+      </CustomScrollbar>
     )
   }
 }

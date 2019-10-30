@@ -11,8 +11,8 @@ const Home = (props: any) => {
   return (
     <div>
       <Jumbotron className="jumbotron-home" fluid>
-        <h1><Translate id="pages.home.title" /></h1>
-        <p className="lead text-uppercase"><Translate id="pages.home.description" /></p>
+        <h1 className="text-center"><Translate id="pages.home.title" /></h1>
+        <p className="lead text-uppercase text-center"><Translate id="pages.home.description" /></p>
         <p className="jumbotron-courtesy"><Translate id="pages.home.link" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></p>
       </Jumbotron>
     </div>

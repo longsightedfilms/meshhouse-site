@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const LanguageToggle = ({ languages, activeLanguage, setActiveLanguage} : { languages:any, activeLanguage:any, setActiveLanguage:any }) => (
   <UncontrolledDropdown>
-    <DropdownToggle tag="a" className="nav-link" caret>
+    <DropdownToggle tag="a" className="nav-link nav-link__dropdown" caret>
       <FontAwesomeIcon icon="language" />
       </DropdownToggle>
     <DropdownMenu>
@@ -14,6 +14,7 @@ const LanguageToggle = ({ languages, activeLanguage, setActiveLanguage} : { lang
         <DropdownItem 
           key={lang.code}
           onClick={() => setActiveLanguage(lang.code)}
+          active={activeLanguage.code === lang.code}
         >
           {lang.name}
         </DropdownItem>

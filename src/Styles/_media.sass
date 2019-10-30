@@ -1,0 +1,177 @@
+@media (min-width: 992px) and (max-width: 1199px)
+  #nprogress
+    .bar
+      top: 38px
+  .navbar
+    .nav-item
+      .nav-link
+        font-size: 0.875rem
+        padding: 0.5rem !important
+    &__left
+      order: 1
+      width: auto
+      margin-left: 1rem
+      .nav-item
+        &:last-child
+          .nav-link
+            border-right: none
+    &__center
+      order: 0
+      justify-content: flex-start
+      flex: 0 0 auto
+      .nav-item
+        .nav-link
+          padding: 0.5rem 0 !important
+    &__right
+      order: 2
+  .view-margin
+    margin-top: 2.375rem
+    padding-bottom: 2.375rem
+  .jumbotron-home
+    margin: -2.375rem 0
+  .models
+    &-grid
+      grid-template-columns: repeat(auto-fill, 314px)
+      .card
+        .card-img-top
+          height: 314px
+
+@media (min-width: 768px) and (max-width: 991px)
+  .navbar-brand
+    margin-right: 0
+    padding: 1.25rem 0
+    img
+      height: 1.5rem
+  .navbar
+    .nav-item
+      align-items: stretch
+      .nav-link
+        border: none !important
+        padding: 0.5rem !important
+    &__center
+      display: none
+  .models
+    &-grid
+      grid-column-start: 1
+      grid-column-end: 3
+      grid-template-columns: repeat(auto-fill, calc(50vw - 1.5rem))
+      .card
+        .card-img-top
+          height: auto
+    &-categories
+      grid-row-start: 1
+      grid-row-end: 1
+      grid-column-start: 1
+      grid-column-end: 3
+      .list-unstyled
+        display: flex
+        flex-wrap: wrap
+        li
+          margin-right: 0.5rem
+
+@media (min-width: 576px) and (max-width: 767px)
+  .navbar-brand
+    margin-right: 0
+    padding: 1.25rem 0
+    img
+      height: 1.1rem
+  .navbar
+    .nav-item
+      align-items: stretch
+      .nav-link
+        border: none !important
+        padding: 0.5rem !important
+    &__center
+      display: none
+  .jumbotron
+    &-home
+      padding: 0 1rem
+      h1
+        font-size: 2rem
+  .models
+    &-grid
+      grid-column-start: 1
+      grid-column-end: 3
+      grid-template-columns: repeat(auto-fill, calc(50vw - 1.5rem))
+      .card
+        .card-img-top
+          height: auto
+    &-categories
+      grid-row-start: 1
+      grid-row-end: 1
+      grid-column-start: 1
+      grid-column-end: 3
+      .list-unstyled
+        display: flex
+        flex-wrap: wrap
+        li
+          margin-right: 0.5rem
+  .model
+    &-view__nav-link
+      font-size: 0.875rem
+      padding: 0.5rem
+      img
+        width: 1.5rem
+        height: 1.5rem
+        margin-right: 0.25rem
+
+@media (max-width: 575px)
+  h1
+    font-size: 1.6rem
+  h2
+    font-size: 1.5rem
+  h3
+    font-size: 1.4rem
+  h5, .h5
+    font-size: 1rem
+  .navbar-brand
+    margin-right: 0
+    padding: 1.25rem 0
+    img
+      height: 1.1rem
+  .navbar
+    .nav-item
+      align-items: stretch
+      .nav-link
+        border: none !important
+        padding: 0.5rem !important
+    &__center
+      display: none
+  .jumbotron
+    &-home
+      padding: 0 1rem
+      h1
+        font-size: 1.5rem
+      .lead
+        font-size: 1rem
+    &-courtesy
+      position: static
+      text-align: center
+  .models
+    &-container
+      padding: 0 0.5rem
+      grid-gap: 1rem 0rem
+    &-grid
+      grid-column-start: 1
+      grid-column-end: 3
+      grid-template-columns: repeat(auto-fill, calc(100vw - 1rem))
+      .card
+        .card-img-top
+          height: auto
+    &-categories
+      grid-row-start: 1
+      grid-row-end: 1
+      grid-column-start: 1
+      grid-column-end: 3
+      .list-unstyled
+        display: flex
+        flex-direction: column
+  .model
+    &-view__nav-link
+      letter-spacing: 0
+      font-size: 0.75rem
+      padding: 0.5rem
+      img
+        width: 1rem
+        height: 1rem
+        margin-right: 0.25rem

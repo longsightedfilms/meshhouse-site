@@ -1,0 +1,140 @@
+@import '../../node_modules/bootstrap/scss/bootstrap'
+@import '../../node_modules/nprogress/nprogress.css'
+@import '../../node_modules/react-lazy-load-image-component/src/effects/opacity.css'
+
+.App
+  min-height: 100vh
+  display: grid
+  grid-template-rows: 1fr auto
+
+.view
+  min-height: 17px
+  max-height: calc(100vh + 17px)
+
+.track-vertical
+  right: 2px
+  bottom: 2px
+  top: 74px
+  height: calc(100% - 76px)
+  border-radius: 3px
+
+.thumb-vertical
+  cursor: pointer
+  border-radius: inherit
+  background-color: transparentize($secondary, 0.5)
+  transition: background-color 0.2s ease
+  &:hover, &:active
+    background-color: $secondary
+
+.view-margin
+  margin-top: 4.5rem
+  padding-bottom: 4.5rem
+
+.navbar
+  padding: 0 1rem
+  .nav-item
+    display: flex
+    align-items: center
+    &:last-child
+      .nav-link
+        border-right: 1px solid #666666
+  .nav-link
+    border-left: 1px solid #666666
+    padding: 1.5rem !important
+    &.active
+      background-color: #4a525a
+      border-color: #4a525a
+    &__dropdown
+      cursor: pointer
+
+.navbar-nav
+  align-items: center
+
+.navbar-brand
+  padding: 0.5rem 1rem
+  margin: 0
+  display: flex
+  align-items: center
+  img
+    height: 1.375rem
+
+.jumbotron
+  border-radius: 0
+  position: relative
+  &-home
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../Assets/images/landscape-4480996_1920.jpg') no-repeat center center/cover
+    margin: -4.5rem 0
+    color: #cccccc
+  &-courtesy
+    position: absolute
+    left: 1rem
+    bottom: 0
+
+.models-container
+  display: grid
+  grid-template-columns: 1fr 300px
+  padding: 0 1rem
+  gap: 1rem
+  align-items: flex-start
+
+.models-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, 400px)
+  gap: 1rem
+  .card
+    .card-img-top
+      height: 398px
+
+.model-dccs
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  position: absolute
+  top: 0
+  right: 0
+  padding: 0.25rem
+  background-color: rgba(0,0,0,0.7)
+  img
+    display: block
+    width: 2rem
+    height: 2rem
+    object-fit: contain
+    margin-bottom: 0.5rem
+    &:last-child
+      margin-bottom: 0
+
+.model-view__nav-link
+  display: flex
+  align-items: center
+  text-transform: uppercase
+  font-weight: 700
+  letter-spacing: 1px
+  img
+    display: block
+    width: 2rem
+    height: 2rem
+    margin-right: 0.5rem
+.model
+  &-single
+    .img-thumbnail
+      width: 100%
+
+#nprogress
+  .bar
+    top: 68px
+    height: 0.2rem
+  .peg
+    box-shadow: none
+  .spinner
+    top: 85px
+    &-icon
+      width: 2rem
+      height: 2rem
+      border-width: 0.2rem
+@import 'navbar'
+@import 'media'

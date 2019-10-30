@@ -54,11 +54,11 @@ class Model extends React.PureComponent<any, any> {
           </Container>
           <TabContent activeTab={this.state.activeTab}>
             {model.variations.map((item: any, index: number) =>
-              <TabPane key={index} tabId={index}>
+              <TabPane className="model-single" key={index} tabId={index}>
                 <Container>
                   <Row>
                     <Col lg={7}>
-                      <img src={getImageLink(item.thumbnail)} alt={model.name} />
+                      <img className="img-thumbnail mb-4 mb-lg-0" src={getImageLink(item.thumbnail)} alt={model.name} />
                     </Col>
                     <Col lg={5}>
                       <Table bordered>

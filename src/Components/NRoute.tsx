@@ -3,19 +3,19 @@ import { Route } from 'react-router-dom'
 import nprogress from 'nprogress'
 
 class NRoute extends React.Component {
-    UNSAFE_componentWillMount() {
-        nprogress.start()
-    }
+  UNSAFE_componentWillMount() {
+    nprogress.start()
+  }
 
-    componentDidMount() {
-        nprogress.done()
-    }
+  componentDidMount() {
+    nprogress.done()
+  }
 
-    render() {
-        return (
-            <Route {...this.props} />
-        )
-    }
+  render() {
+    return (
+      <Route {...this.props} />
+    )
+  }
 }
 
 export default NRoute

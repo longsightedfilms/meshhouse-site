@@ -1,29 +1,29 @@
-import loadable from "@loadable/component"
+import React from 'react'
 
 const routes = [
   {
     path: '/application',
-    component: loadable(() => import('./Views/Application'))
+    component: React.lazy(() => import(/* webpackChunkName: "PageApplication" */ './Views/Application'))
   },
   {
     path: '/terms-of-use',
-    component: loadable(() => import('./Views/TermsOfUse'))
+    component: React.lazy(() => import(/* webpackChunkName: "PageTOS" */ './Views/TermsOfUse'))
   },
   {
     path: '/models/view/:slug',
-    component: loadable(() => import('./Views/Model'))
+    component: React.lazy(() => import(/* webpackChunkName: "PageSingleModel" */ './Views/Model'))
   },
   {
     path: '/models/:category',
-    component: loadable(() => import('./Views/Models'))
+    component: React.lazy(() => import(/* webpackChunkName: "PageModels" */ './Views/Models'))
   },
   {
     path: '/models',
-    component: loadable(() => import('./Views/Models'))
+    component: React.lazy(() => import(/* webpackChunkName: "PageModels" */ './Views/Models'))
   },
   {
     path: '/',
-    component: loadable(() => import('./Views/Home'))
+    component: React.lazy(() => import(/* webpackChunkName: "PageIndex" */ './Views/Home'))
   },
 ]
 
