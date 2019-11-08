@@ -27,6 +27,9 @@ const Header = (props: any) => {
           <NavItem>
             <NavLink tag={RRNavLink} to={'/models'}><Translate id="navigation.models" /></NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} to={'/how-to-use-models'}><Translate id="navigation.howto" /></NavLink>
+          </NavItem>
         </Nav>
         <Nav className="navbar__center" navbar>
           <NavItem>

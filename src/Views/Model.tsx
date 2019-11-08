@@ -5,6 +5,7 @@ import { Jumbotron, Container, Row, Col, Table, TabContent, TabPane, Nav, NavIte
 import { getImageLink, getDccIcon, getStringedArray, stringCapitalize } from '../Functions/Helpers'
 import { format } from 'date-fns'
 import { Translate } from "react-localize-redux"
+import ModelViewer from "../Components/Models/Viewer"
 import classnames from 'classnames'
 
 class Model extends React.PureComponent<any, any> {
@@ -30,13 +31,15 @@ class Model extends React.PureComponent<any, any> {
     let model = this.props.pageData !== undefined ? this.props.pageData[0] : {}
     return (
       <React.Fragment>
-        <Jumbotron className="text-center" fluid>
-          <React.Fragment>
-            <h1>{model.name}</h1>
-          </React.Fragment>
-        </Jumbotron>
         {this.props.pageData !== undefined &&
         <div>
+          <Jumbotron className="jumbotron-model" fluid>
+            <React.Fragment>
+              <h1>{model.name}</h1>
+              <img className="jumbotron-cover" src={getImageLink(model.variations[0].thumbnail)} alt={model.name} />
+              <img className="jumbotron-cover jumbotron-cover_lg" src={getImageLink(model.variations[0].thumbnail)} alt={model.name} />
+            </React.Fragment>
+          </Jumbotron>
           <Container>
             <Nav tabs>
               {model.variations.map((item: any, index: number) =>
@@ -58,7 +61,7 @@ class Model extends React.PureComponent<any, any> {
                 <Container>
                   <Row>
                     <Col lg={7}>
-                      <img className="img-thumbnail mb-4 mb-lg-0" src={getImageLink(item.thumbnail)} alt={model.name} />
+                      {'<ModelViewer className="img-thumbnail mb-4 mb-lg-0"/>'}
                     </Col>
                     <Col lg={5}>
                       <Table bordered>

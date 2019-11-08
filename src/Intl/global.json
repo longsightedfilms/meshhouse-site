@@ -3,6 +3,7 @@
   "navigation": {
     "home": ["Home", "Главная"],
     "models": ["Models", "Модели"],
+    "howto": ["How to use", "Как использовать"],
     "tos": ["Terms of use", "Условия использования"],
     "application": ["Application", "Приложение"]
   },
@@ -37,6 +38,39 @@
         "Courtesy of <a href='https://pixabay.com/en/users/enriquelopezgarre-3764790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>enriquelopezgarre</a> from <a href='https://pixabay.com/en/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>Pixabay</a>",
         "Изображение <a href='https://pixabay.com/ru/users/enriquelopezgarre-3764790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>enriquelopezgarre</a> с сайта <a href='https://pixabay.com/ru/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4480996'>Pixabay</a>"
       ]
+    },
+    "howto": {
+      "title": ["How to use models", "Как использовать модели"],
+      "tabs": {
+        "max": {
+          "alert": [
+            "For properly model import you need to add path to textures in 'Customize -> Configure User Paths -> External Files'. Instructions will be given for 3ds Max 2016.",
+            "Для корректного импорта модели необходимо сначала прописать пути к текстурам в 'Customize -> Configure User Paths -> External Files'. Инструкции будут даны для 3ds Max 2016."
+          ],
+          "titleMerge": ["Variant 1 - Merge to scene", "Вариант 1 - Слияние с текущей сценой"],
+          "titleXref": ["Variant 2 - xRef", "Вариант 2 - xRef"],
+          "mergeList": [
+            "<li>+ Full control on model and materials</li><li>- Changes in original model need to import again in current scene</li>",
+            "<li>+ Полный контроль над моделью и материалами</li><li>- Изменения, внесенные в оригинальную модель нужно заново импортировать в сцену</li>"
+          ],
+          "mergeText": [
+            "For merge model with scene you need to click 'File' (or click on 3ds Max icon) -> 'Import' -> 'Merge' and select file.",
+            "Для слияния модели со сценой необходимо зайти в 'File' (либо нажать на иконку 3ds Max) -> 'Import' -> 'Merge' и выбрать необходимый файл."
+          ],
+          "xrefList": [
+            "<li>+ Smaller scene size</li><li>+ Can use proxy to improve FPS</li><li>+ Changes in xRef syncs with all scenes</li><li>- Can't edit modifiers in xRef</li>",
+            "<li>+ Меньший размер сцены</li><li>+ Возможно использовать прокси для увеличения частоты кадров</li><li>+ Изменения в xRef сихронихируются со всеми сценами</li><li>- Невозможно редактировать модификаторы в xRef</li>"
+          ],
+          "xrefText1": [
+            "For import model as xRef you need to click 'File' (or click on 3ds Max icon) -> 'References' -> 'XRef Objects'",
+            "Для импорта модели как xRef необходимо зайти в 'File' (либо нажать на иконку 3ds Max) -> 'References' -> 'XRef Objects'"
+          ],
+          "xrefText2": [
+            "Choose preset 'Static Assets' then click on button in left upper corner (looks like square in curly braces) and select file.",
+            "Выберите пресет 'Static Assets', затем нажмите на кнопку в левом верхнем углу (выглядит как квадрат в фигурных скобках) и выберите необходимый файл."
+          ]
+        }
+      }
     },
     "models": {
       "title": ["Models catalog", "Каталог моделей"],

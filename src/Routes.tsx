@@ -10,6 +10,10 @@ const routes = [
     component: React.lazy(() => import(/* webpackChunkName: "PageTOS" */ './Views/TermsOfUse'))
   },
   {
+    path: '/how-to-use-models',
+    component: React.lazy(() => import(/* webpackChunkName: "PageHowToUseModels" */ './Views/HowToUseModels'))
+  },
+  {
     path: '/models/view/:slug',
     component: React.lazy(() => import(/* webpackChunkName: "PageSingleModel" */ './Views/Model'))
   },
