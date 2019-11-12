@@ -95,7 +95,13 @@
       "links": ["Download links:", "Ссылки на скачивание:"],
       "linksTexProc": ["Textures not needed", "Текстуры не нужны"],
       "linksTex": ["Download textures", "Скачать текстуры"],
-      "linksModel": ["Download model", "Скачать модель"]
+      "linksModel": ["Download model", "Скачать модель"],
+      "viewer": {
+        "material": ["Toggle material channel", "Выбрать канал материала"],
+        "rotate": ["Toggle auto-rotate", "Авто-вращение камеры"],
+        "fullscreen": ["Toggle fullscreen", "Полный экран"],
+        "info": ["Model preview may differs from real model", "Предпросмотр модели может отличатся от реальной модели"]
+      }
     },
     "tos": {
       "title": [
