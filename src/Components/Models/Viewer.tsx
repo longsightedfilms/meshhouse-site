@@ -10,11 +10,10 @@ import classnames from 'classnames'
 import Loader from './Loader'
 import { Button, UncontrolledTooltip, UncontrolledButtonDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { getPreviewLink } from '../../Functions/Helpers'
 
 import logo from '../../Assets/logo_text.svg'
 import hdri from '../../Assets/images/hdri/colorful_studio_1k.hdr'
-
-const url = 'http://172.16.1.45/upload/interactive/BoomBox.glb'
 
 class ModelViewer extends React.Component<any, any> {
   constructor(props: any) {
@@ -106,7 +105,7 @@ class ModelViewer extends React.Component<any, any> {
 
         // Add model
         const loader = new GLTFLoader()
-        loader.load(url, (gltf: any) => {
+        loader.load(getPreviewLink(this.props.model), (gltf: any) => {
           gltf.scene.traverse((child: any) => {
             if (child.isMesh) {
               child.geometry.center()

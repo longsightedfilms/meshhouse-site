@@ -61,7 +61,7 @@ class Model extends React.PureComponent<any, any> {
                 <Container>
                   <Row>
                     <Col lg={7}>
-                      <ModelViewer className="img-thumbnail mb-4 mb-lg-0" />
+                      <ModelViewer className="img-thumbnail mb-4 mb-lg-0" model={model.preview}/>
                     </Col>
                     <Col lg={5}>
                       <Table bordered>

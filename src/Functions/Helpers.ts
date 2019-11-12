@@ -15,6 +15,10 @@ export function getImageLink(url: string): string {
   return SITE_URL + (!isDev ? 'backend/' : '') + `upload/thumbnails/${url}`
 }
 
+export function getPreviewLink(url: string): string {
+  return SITE_URL + (!isDev ? 'backend/' : '') + `upload/interactive/${url}`
+}
+
 export function getDccIcon(item: any) {
   let dcc = item.dcc
   let icons: any = {
