@@ -35,6 +35,7 @@ class ModelViewer extends React.Component<any, any> {
   controls: any
   materials: any = {
     full: null,
+    albedo: null,
     normal: null,
     metalness: null,
     occlusion: null,
@@ -43,6 +44,7 @@ class ModelViewer extends React.Component<any, any> {
   }
   materialLabels: any = {
     full: "PBR",
+    albedo: "Albedo",
     normal: "Normal",
     occlusion: "Ambient Occlusion",
     metalness: "Metalness",
@@ -116,6 +118,11 @@ class ModelViewer extends React.Component<any, any> {
 
               this.materials.full = new THREE.MeshStandardMaterial(child.material)
               
+              this.materials.albedo = new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: child.material.map
+              })
+
               this.materials.normal = new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 map: child.material.normalMap

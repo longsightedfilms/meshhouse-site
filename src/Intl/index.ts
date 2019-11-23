@@ -1,4 +1,9 @@
-{
+import errors from './errors'
+import model from './model'
+import models from './models'
+
+const translations = {
+  "errors": errors,
   "language": ["Language", "Язык"],
   "navigation": {
     "home": ["Home", "Главная"],
@@ -72,37 +77,8 @@
         }
       }
     },
-    "models": {
-      "title": ["Models catalog", "Каталог моделей"],
-      "category": ["Category - ${category}", "Категория - ${category}"],
-      "categories": ["Categories:", "Категории:"],
-      "notFound": [
-        "Models not found <span role='img' aria-label='sad face'>😞</span>", 
-        "Модели не найдены <span role='img' aria-label='sad face'>😞</span>"
-      ]
-    },
-    "model": {
-      "dccVersion": ["Software version:", "Версия ПО:"],
-      "size": ["Archive size (with model):", "Вес архива (с моделью):"],
-      "date": ["Upload date:", "Дата загрузки:"],
-      "polys": ["Polys:", "Полигонов:"],
-      "verts": ["Verts:", "Вершин:"],
-      "hairFur": ["Hair & fur:", "Система волос/меха:"],
-      "morpher": ["Morpher / blendshapes:", "Morpher / blendshapes:"],
-      "skinning": ["Skinning:", "Система костей:"],
-      "renderers": ["Renderers:", "Рендереры:"],
-      "textures": ["Textures:", "Текстуры:"],
-      "links": ["Download links:", "Ссылки на скачивание:"],
-      "linksTexProc": ["Textures not needed", "Текстуры не нужны"],
-      "linksTex": ["Download textures", "Скачать текстуры"],
-      "linksModel": ["Download model", "Скачать модель"],
-      "viewer": {
-        "material": ["Toggle material channel", "Выбрать канал материала"],
-        "rotate": ["Toggle auto-rotate", "Авто-вращение камеры"],
-        "fullscreen": ["Toggle fullscreen", "Полный экран"],
-        "info": ["Model preview may differs from real model", "Предпросмотр модели может отличатся от реальной модели"]
-      }
-    },
+    "models": models,
+    "model": model,
     "tos": {
       "title": [
         "Terms of use, privacy policy, DMCA",
@@ -128,3 +104,5 @@
     }
   }
 }
+
+export default translations

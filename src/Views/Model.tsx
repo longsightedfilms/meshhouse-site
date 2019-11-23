@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchSingleModel } from '../Store/models/actions'
 import { Jumbotron, Container, Row, Col, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button } from 'reactstrap'
-import { getImageLink, getDccIcon, getStringedArray, stringCapitalize } from '../Functions/Helpers'
+import { getImageLink, getDccIcon, getStringedArray } from '../Functions/Helpers'
 import { format } from 'date-fns'
 import { Translate } from "react-localize-redux"
 import ModelViewer from "../Components/Models/Viewer"
@@ -20,7 +20,7 @@ class Model extends React.PureComponent<any, any> {
     const slug = this.props.match.params.slug
     this.props.fetchSingleModel(slug).then(() => {
       document.title = `${this.props.pageData[0].name} - Meshhouse`
-    })
+    }).catch(() => {})
   }
 
   handleTabToggle(index: number) {
@@ -49,7 +49,7 @@ class Model extends React.PureComponent<any, any> {
                     onClick={() => { this.handleTabToggle(0) }}
                   >
                     <img src={getDccIcon(item).icon} alt={item.dcc} />
-                    {getDccIcon(item).name}
+                    {`${getDccIcon(item).name} ${item.dccVersion}`}
                   </NavLink>
                 </NavItem>
               )}
@@ -67,10 +67,6 @@ class Model extends React.PureComponent<any, any> {
                       <Table bordered>
                         <tbody>
                           <tr>
-                            <th><Translate id="pages.model.dccVersion" /></th>
-                            <td>{item.dccVersion}</td>
-                          </tr>
-                          <tr>
                             <th><Translate id="pages.model.size" /></th>
                             <td>{item.size}</td>
                           </tr>
@@ -87,24 +83,26 @@ class Model extends React.PureComponent<any, any> {
                             <td>{item.verts}</td>
                           </tr>
                           <tr>
-                            <th><Translate id="pages.model.hairFur" /></th>
-                            <td>{item.hairFur}</td>
+                            <th><Translate id="pages.model.hairFur.title" /></th>
+                            <td><Translate id={`pages.model.hairFur.${item.hairFur}`} /></td>
                           </tr>
                           <tr>
-                            <th><Translate id="pages.model.morpher" /></th>
-                            <td>{String(item.morpher)}</td>
+                            <th><Translate id="pages.model.morpher.title" /></th>
+                            <td><Translate id={`pages.model.morpher.${String(item.morpher)}`} /></td>
                           </tr>
                           <tr>
-                            <th><Translate id="pages.model.skinning" /></th>
-                            <td>{item.skinning}</td>
+                            <th><Translate id="pages.model.skinning.title" /></th>
+                            <td>{item.skinning === 'none' && 
+                              <Translate id={`pages.model.skinning.${item.skinning}`} />}
+                            </td>
                           </tr>
                           <tr>
                             <th><Translate id="pages.model.renderers" /></th>
                             <td>{getStringedArray(item.renderers)}</td>
                           </tr>
                           <tr>
-                            <th><Translate id="pages.model.textures" /></th>
-                            <td>{stringCapitalize(item.textures)}</td>
+                            <th><Translate id="pages.model.textures.title" /></th>
+                            <td><Translate id={`pages.model.textures.${item.textures}`} /></td>
                           </tr>
                           <tr>
                             <th colSpan={2} className="text-center bg-secondary text-light"><Translate id="pages.model.links" /></th>
@@ -126,7 +124,6 @@ class Model extends React.PureComponent<any, any> {
                                   color="primary"
                                   href={item.links.textures}
                                   block
-                                  disabled
                                 >
                                   <Translate id="pages.model.linksTex" />
                                 </Button>

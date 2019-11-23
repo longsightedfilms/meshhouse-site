@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Switch } from "react-router-dom"
 import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
-import globalTranslations from "./Intl/global.json"
+import globalTranslations from "./Intl/"
 import Header from './Components/Header'
 import routes from './Routes'
 import NRoute from './Components/NRoute'

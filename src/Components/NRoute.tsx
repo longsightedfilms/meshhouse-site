@@ -1,14 +1,17 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { setErrorStatusDispatch } from '../Store/error/actions'
 import nprogress from 'nprogress'
 
-class NRoute extends React.Component {
+class NRoute extends React.Component<any, any> {
   UNSAFE_componentWillMount() {
     nprogress.start()
   }
 
   componentDidMount() {
     nprogress.done()
+    this.props.setErrorStatusDispatch(false, '')
   }
 
   render() {
@@ -17,5 +20,6 @@ class NRoute extends React.Component {
     )
   }
 }
+const mapStateToProps = (state: any) => ({ error: state.error })
 
-export default NRoute
+export default connect(mapStateToProps, { setErrorStatusDispatch })(NRoute)

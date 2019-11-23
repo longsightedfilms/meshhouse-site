@@ -1,6 +1,6 @@
 import React from 'react'
 import { format } from 'date-fns'
-import { Card, CardBody, CardText, CardTitle } from 'reactstrap'
+import { UncontrolledTooltip, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 import { NavLink } from "react-router-dom"
 import { getImageLink, getDccIcon } from '../../Functions/Helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,7 +20,12 @@ const ModelCard = (props: any) => (
         />
         <div className="model-dccs">
           {props.item.variations.map((variation: any, index: number) =>
-            <img key={index} src={getDccIcon(variation).icon} alt={variation.dcc} />
+            <div key={index}>
+              <img src={getDccIcon(variation).icon} alt={variation.dcc} id={`Tooltip${variation.dcc}`} />
+              <UncontrolledTooltip placement="left" target={`Tooltip${variation.dcc}`}>
+                {`${getDccIcon(variation).name} ${variation.dccVersion}`}
+              </UncontrolledTooltip>
+            </div>
           )}
         </div>
       </NavLink>
