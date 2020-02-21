@@ -1,9 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from 'react'
 import { Switch } from "react-router-dom"
 import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
 import globalTranslations from "./Intl/"
 import Header from './Components/Header'
+import Footer from './Components/Footer'
 import routes from './Routes'
 import NRoute from './Components/NRoute'
 import CustomScrollbar from './Components/CustomScrollbar'
@@ -57,6 +58,7 @@ class App extends React.Component<any, any> {
               </Switch>
             </Suspense>
           </div>
+          <Footer />
         </div>
       </CustomScrollbar>
     )

@@ -9,7 +9,7 @@ import c4d from '../Assets/icons/cinema4d.svg'
 import houdini from '../Assets/icons/houdini.svg'
 
 export const isDev = process.env.NODE_ENV === 'development'
-export const SITE_URL = isDev ? 'http://172.16.1.45/' : 'https://meshhouse.ml/'
+export const SITE_URL = isDev ? 'http://172.16.1.45/' : 'https://meshhouse.art/'
 
 export function getImageLink(url: string): string {
   return SITE_URL + (!isDev ? 'backend/' : '') + `upload/thumbnails/${url}`

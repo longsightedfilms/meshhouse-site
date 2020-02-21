@@ -6,6 +6,10 @@
   min-height: 100vh
   display: grid
   grid-template-rows: auto
+  &__footer
+    margin-top: 2rem
+    padding: 1rem 15px
+    align-self: flex-end
 
 .view
   min-height: 17px
@@ -28,7 +32,6 @@
 
 .view-margin
   margin-top: 4.5rem
-  padding-bottom: 4.5rem
 
 .navbar
   padding: 0 1rem
@@ -104,6 +107,11 @@
       object-position: 50%
       filter: blur(20px) brightness(0.5)
 
+.navbar-error
+  z-index: 1000 !important
+.dropdown-menu
+  z-index: 1030
+
 .models-container
   display: grid
   grid-template-columns: 1fr 300px
@@ -153,70 +161,13 @@
   &-single
     .img-thumbnail
       width: 100%
-.meshhouse-viewer, .meshhouse-loader
-  width: 666px
+
+model-viewer
   margin-right: -30px
-  height: 666px
-  &:focus
-    outline: 0
-
-.meshhouse-viewer
-  position: relative
-  canvas
-    cursor: grab
-    &:active
-      cursor: grabbing
-  &__controls
-    position: absolute
-    display: flex
-    padding: 1rem
-    justify-content: space-between
-    align-items: center
-    z-index: 1
-    bottom: 0
-    left: 0
-    width: 100%
-    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))
-    img
-      display: block
-      height: 1.5rem
-    div
-      .btn
-        margin-left: 0.5rem
-
-@keyframes loader-fade
-  0%
-    opacity: 1
-  100%
-    opacity: 0
-    pointer-events: none
-    display: none
-
-.meshhouse-loader
-  background: $dark
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  position: relative
-  z-index: 1
-  margin-top: -666px
-  .spinner
-    position: relative
-    img
-      display: block
-      width: 10rem
-      height: 10rem
-      position: absolute
-      top: 50%
-      left: 50%
-      transform: translate(-50%, -50%)
-    .spinner-border
-      width: 20rem
-      height: 20rem
-      border-width: 1rem
-  &.loaded
-    animation: loader-fade 2s ease 0.5s forwards
+  height: 617px
+  img
+    width: 210px
+    margin-right: -1rem
 #nprogress
   .bar
     top: 68px

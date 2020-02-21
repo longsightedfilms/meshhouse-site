@@ -1,6 +1,6 @@
 import React from 'react'
-import { renderToStaticMarkup } from "react-dom/server"
-import { Translate } from "react-localize-redux"
+//import { renderToStaticMarkup } from "react-dom/server"
+//import { Translate } from "react-localize-redux"
 
 const Cinema4D = () => {
   return (

@@ -8,6 +8,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.6",
+    "@meshhouse/model-viewer": "^1.0.1",
     "@types/classnames": "^2.2.9",
     "@types/jest": "24.0.19",
     "@types/node": "12.7.12",
@@ -23,7 +24,6 @@
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.5.1",
-    "node-sass": "^4.13.0",
     "nprogress": "^0.2.0",
     "qs": "^6.9.0",
     "react": "^16.10.2",
@@ -33,13 +33,15 @@
     "react-localize-redux": "^3.5.3",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
     "reactstrap": "^8.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "three": "^0.110.0",
-    "typescript": "3.6.4",
     "uniqid": "^5.0.3"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "react-scripts": "^3.4.0",
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",

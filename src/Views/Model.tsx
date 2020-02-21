@@ -2,10 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchSingleModel } from '../Store/models/actions'
 import { Jumbotron, Container, Row, Col, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button } from 'reactstrap'
-import { getImageLink, getDccIcon, getStringedArray } from '../Functions/Helpers'
+import { getPreviewLink, getImageLink, getDccIcon, getStringedArray } from '../Functions/Helpers'
 import { format } from 'date-fns'
 import { Translate } from "react-localize-redux"
-import ModelViewer from "../Components/Models/Viewer"
+import '@meshhouse/model-viewer'
+
+import logoIcon from '../Assets/logo_icon.svg'
+import logoText from '../Assets/logo_text.svg'
+import hdri from '../Assets/images/hdri/colorful_studio_1k.hdr'
 import classnames from 'classnames'
 
 class Model extends React.PureComponent<any, any> {
@@ -61,7 +65,22 @@ class Model extends React.PureComponent<any, any> {
                 <Container>
                   <Row>
                     <Col lg={7}>
-                      <ModelViewer className="img-thumbnail mb-4 mb-lg-0" model={model.preview}/>
+                      <model-viewer
+                        model={getPreviewLink(model.preview)}
+                        hdri={hdri}
+                        modeltitle={model.name}
+                        author="Long-Sighted Films"
+                        authorlink="https://longsightedfilms.com"
+                        autohide={true}
+                        thumbnail={getImageLink(model.variations[0].thumbnail)}
+                      >
+                        <span slot="loader">
+                          <img src={logoIcon} alt="Meshhouse"/>
+                        </span>
+                        <span slot="logo">
+                          <img src={logoText} alt="Meshhouse"/>
+                        </span>
+                      </model-viewer>
                     </Col>
                     <Col lg={5}>
                       <Table bordered>
