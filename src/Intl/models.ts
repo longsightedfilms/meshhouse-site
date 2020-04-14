@@ -1,7 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 export default {
   "title": ["Models catalog", "Каталог моделей"],
-  "category": ["Category - ${category}", "Категория - ${category}"],
   "categories": ["Categories:", "Категории:"],
   "filters": {
     "title": ["Filters:", "Фильтры:"],

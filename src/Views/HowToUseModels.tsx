@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Jumbotron, Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 import { Translate, withLocalize } from "react-localize-redux"
-import { getDccIcon } from '../Functions/Helpers'
+import { getDccName } from 'Functions/Helpers'
 import classnames from 'classnames'
+import Icon from 'Components/UI/Icon'
 // Tab contents
 import Max from './HowTo/Max'
 import Maya from './HowTo/Maya'
@@ -40,8 +41,8 @@ const HowToUseModels = (props: any) => {
                 className={classnames({ active: activeTab === index }, "model-view__nav-link")}
                 onClick={() => { setActiveTab(index) }}
               >
-                <img src={getDccIcon(nav).icon} alt={getDccIcon(nav).name} />
-                {getDccIcon(nav).name}
+                <Icon icon={`programs/${nav.dcc}`} />
+                {getDccName(nav)}
               </NavLink>
             </NavItem>
           )}

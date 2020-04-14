@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSingleModel } from '../Store/models/actions'
+import { fetchSingleModel } from 'Store/models/actions'
 import { Jumbotron, Container, Row, Col, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button } from 'reactstrap'
-import { getPreviewLink, getImageLink, getDccIcon, getStringedArray } from '../Functions/Helpers'
+import { getPreviewLink, getImageLink, getDccName, getStringedArray } from 'Functions/Helpers'
 import { format } from 'date-fns'
 import { Translate } from "react-localize-redux"
 import '@meshhouse/model-viewer'
+import Icon from 'Components/UI/Icon'
 
 import logoIcon from '../Assets/logo_icon.svg'
 import logoText from '../Assets/logo_text.svg'
@@ -52,8 +53,8 @@ class Model extends React.PureComponent<any, any> {
                     className={classnames({ active: this.state.activeTab === 0 }, "model-view__nav-link")}
                     onClick={() => { this.handleTabToggle(0) }}
                   >
-                    <img src={getDccIcon(item).icon} alt={item.dcc} />
-                    {`${getDccIcon(item).name} ${item.dccVersion}`}
+                    <Icon icon={`programs/${item.dcc}`} />
+                    {`${getDccName(item)} ${item.dccVersion}`}
                   </NavLink>
                 </NavItem>
               )}
@@ -111,7 +112,7 @@ class Model extends React.PureComponent<any, any> {
                           </tr>
                           <tr>
                             <th><Translate id="pages.model.skinning.title" /></th>
-                            <td>{item.skinning === 'none' && 
+                            <td>{item.skinning === 'none' &&
                               <Translate id={`pages.model.skinning.${item.skinning}`} />}
                             </td>
                           </tr>

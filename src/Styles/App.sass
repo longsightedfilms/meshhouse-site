@@ -2,14 +2,15 @@
 @import '../../node_modules/nprogress/nprogress.css'
 @import '../../node_modules/react-lazy-load-image-component/src/effects/opacity.css'
 
+@import 'variables'
+
+@import 'themes/dark'
+@import 'themes/light'
+
 .App
   min-height: 100vh
   display: grid
-  grid-template-rows: auto
-  &__footer
-    margin-top: 2rem
-    padding: 1rem 15px
-    align-self: flex-end
+  grid-template-rows: 1fr auto
 
 .view
   min-height: 17px
@@ -112,39 +113,6 @@
 .dropdown-menu
   z-index: 1030
 
-.models-container
-  display: grid
-  grid-template-columns: 1fr 300px
-  padding: 0 1rem
-  gap: 1rem
-  align-items: flex-start
-
-.models-grid
-  display: grid
-  grid-template-columns: repeat(auto-fill, 400px)
-  gap: 1rem
-  .card
-    .card-img-top
-      height: 398px
-
-.model-dccs
-  display: flex
-  flex-direction: column
-  justify-content: flex-end
-  position: absolute
-  top: 0
-  right: 0
-  padding: 0.25rem
-  background-color: rgba(0,0,0,0.7)
-  img
-    display: block
-    width: 2rem
-    height: 2rem
-    object-fit: contain
-    margin-bottom: 0.5rem
-    &:last-child
-      margin-bottom: 0
-
 .model-view__nav-link
   display: flex
   align-items: center
@@ -180,5 +148,12 @@ model-viewer
       width: 2rem
       height: 2rem
       border-width: 0.2rem
+
+@import 'badge'
+@import 'icon'
+
+
+@import 'pages/models'
+@import 'sidebar'
 @import 'navbar'
 @import 'media'

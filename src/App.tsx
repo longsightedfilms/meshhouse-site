@@ -16,9 +16,9 @@ class App extends React.Component<any, any> {
 
     const languages = [
       { name: "English", code: "en" },
-      { name: "Русский", code: "ru" }
+      //{ name: "Русский", code: "ru" }
     ]
-    
+
     const defaultLanguage =
       localStorage.getItem("languageCode") || languages[0].code
 
@@ -58,7 +58,6 @@ class App extends React.Component<any, any> {
               </Switch>
             </Suspense>
           </div>
-          <Footer />
         </div>
       </CustomScrollbar>
     )

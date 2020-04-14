@@ -1,34 +1,15 @@
 import axios from 'axios'
 import uniqid from 'uniqid'
 
-import max from '../Assets/icons/max.svg'
-import maya from '../Assets/icons/maya.svg'
-import modo from '../Assets/icons/modo.svg'
-import blender from '../Assets/icons/blender.svg'
-import c4d from '../Assets/icons/cinema4d.svg'
-import houdini from '../Assets/icons/houdini.svg'
-
-export const isDev = process.env.NODE_ENV === 'development'
-export const SITE_URL = isDev ? 'http://172.16.1.45/' : 'https://meshhouse.art/'
-
 export function getImageLink(url: string): string {
-  return SITE_URL + (!isDev ? 'backend/' : '') + `upload/thumbnails/${url}`
+  return `/backend/upload/thumbnails/${url}`
 }
 
 export function getPreviewLink(url: string): string {
-  return SITE_URL + (!isDev ? 'backend/' : '') + `upload/interactive/${url}`
+  return `/backend/upload/interactive/${url}`
 }
 
-export function getDccIcon(item: any) {
-  let dcc = item.dcc
-  let icons: any = {
-    "3dsmax": max,
-    "maya": maya,
-    "blender": blender,
-    "cinema4d": c4d,
-    "houdini": houdini,
-    "modo": modo,
-  }
+export function getDccName(item: any) {
   let names: any = {
     "3dsmax": "3ds Max",
     "maya": "Maya",
@@ -37,7 +18,7 @@ export function getDccIcon(item: any) {
     "houdini": "Houdini",
     "modo": "Modo",
   }
-  return { name: names[dcc], icon: icons[dcc] }
+  return names[item.dcc]
 }
 
 export function stringCapitalize(string: string): string  {
@@ -58,7 +39,7 @@ export function getStringedArray(array: string[]): string  {
 export function fetchAPI(method: string, params: any): Promise<any> {
   return axios({
     method: "POST",
-    url: `${SITE_URL}backend/api/v1`,
+    url: `/backend/api/v1`,
     data: {
       "jsonrpc": "2.0",
       "method": method,
@@ -67,4 +48,25 @@ export function fetchAPI(method: string, params: any): Promise<any> {
     },
     responseType: "json"
   })
+}
+
+export function getNestedCategories(links: any[]): any {
+  if (links === undefined) {
+    return []
+  } else {
+    const categories: any[] = []
+    const nestedLinks = links.filter((link: any) => link.parentId !== null)
+    links.forEach((link: any) => {
+      if(link.parentId === null) {
+        const newLink = {...link, subcategories: []}
+        nestedLinks.forEach((nestedLink: any) => {
+          if (nestedLink.parentId === link.id) {
+            newLink.subcategories.push(nestedLink)
+          }
+        })
+        categories.push(newLink)
+      }
+    })
+    return categories
+  }
 }

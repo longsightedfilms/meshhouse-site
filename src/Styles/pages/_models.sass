@@ -1,0 +1,92 @@
+.models-view
+  height: 100%
+  display: grid
+  grid-template-columns: 300px 1fr
+
+.models-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, 400px)
+  gap: 1rem
+  .card
+    .card-img-top
+      height: 398px
+
+.models
+  &-grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, 400px)
+    gap: 1rem
+    padding: 1rem
+    .card
+      .card-img-top
+        height: 398px
+  &-filter
+    display: flex
+    align-items: center
+    background-color: $lightGray
+    padding: 0 1rem
+    flex-wrap: wrap
+    &__title
+      flex: 1 0 auto
+      margin: 0.5rem 0
+      font-size: 2rem
+    .form-control
+      margin-left: 1rem
+      flex: 0.25 1 auto
+      width: auto
+      &:first-child
+        margin-left: 0
+  &-card
+    perspective: 800px
+    &__image
+      width: 100%
+      height: 100%
+      display: block
+      object-fit: cover
+      transition: all 0.3s ease
+    &__inner
+      position: relative
+      border: 3px solid rgba(0,0,0,0)
+      transition: all 0.3s ease
+    &__info
+      position: absolute
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      transition: all 0.3s ease
+      background-color: transparentize(darken($lightThemeColor, 10%), 0.3)
+      opacity: 0
+      color: #fff
+      &-title
+        font-size: 2rem
+      &-time
+        font-size: 1rem
+        margin: 0
+      &-dccs
+        position: absolute
+        bottom: 0.5rem
+        right: 0.5rem
+        padding: 0.25rem
+        img
+          display: block
+          width: 2rem
+          height: 2rem
+          object-fit: contain
+          margin-right: 0.5rem
+          &:last-child
+            margin-right: 0
+    &:hover
+      .models-card
+        &__image
+          filter: blur(10px)
+        &__inner
+          border: 3px solid $lightThemeColorAlt
+          transform: rotateX(5deg) rotateY(0deg) translateY(10px)
+          box-shadow: 0px 0px 40px rgba(0,0,0,0.25)
+        &__info
+          opacity: 1
