@@ -1,17 +1,8 @@
-.models-view
-  height: 100%
-  display: grid
-  grid-template-columns: 300px 1fr
-
-.models-grid
-  display: grid
-  grid-template-columns: repeat(auto-fill, 400px)
-  gap: 1rem
-  .card
-    .card-img-top
-      height: 398px
-
 .models
+  &-view
+    height: 100%
+    display: grid
+    grid-template-columns: 400px 1fr
   &-grid
     display: grid
     grid-template-columns: repeat(auto-fill, 400px)
@@ -90,3 +81,64 @@
           box-shadow: 0px 0px 40px rgba(0,0,0,0.25)
         &__info
           opacity: 1
+  &-slider
+    height: 960px !important
+    div[aria-live]
+      @extend .badge
+      top: 1rem !important
+      left: auto !important
+      right: 1rem
+      height: auto !important
+      width: auto !important
+      z-index: 1
+      font-size: 1rem
+      padding: 0.25rem 1rem
+    .slider-slide
+      position: relative
+      img
+        display: block
+        height: 960px
+        width: 100%
+        object-fit: contain
+        object-position: 50%
+      model-viewer
+        height: 960px
+        img
+          width: 64px
+          height: auto
+  &-header
+    display: flex
+    align-items: center
+    padding: 1rem 10vw
+    background-color: $lightGray
+    .buttons
+      display: flex
+      align-items: center
+      margin-left: auto
+      .btn
+        display: flex
+        align-items: center
+        margin-left: 1rem
+        &.disabled
+          color: $lightGray
+      .dropdown-item
+        display: flex
+        align-items: center
+        .icon
+          margin-right: 0.5rem
+  &-description
+    display: grid
+    grid-template-columns: 1fr 0.5fr
+    grid-gap: 1rem
+    background-color: $lightGray
+    width: calc(80vw + 4rem)
+    padding: 2rem
+    margin: 0 auto
+    .tags-container
+      display: flex
+      align-items: center
+      flex-wrap: wrap
+      .badge
+        font-size: 1rem
+        padding: 0.25rem 1rem
+        margin-right: 1rem

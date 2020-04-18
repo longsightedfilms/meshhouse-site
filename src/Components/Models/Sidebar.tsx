@@ -18,6 +18,19 @@ function ModelsSidebar (props: any) {
         <Translate id="pages.models.categories" />
       </p>
       <nav className="models-sidebar__nav">
+        <li className='models-sidebar__navlink'>
+          <NavLink
+            to={`/models/all`}
+            className='models-sidebar__link'
+            activeClassName='models-sidebar__link--active'
+          >
+            <Icon
+              icon='categories/cat-computers'
+            />
+            All models
+            <Badge>{props.modelsCount}</Badge>
+          </NavLink>
+        </li>
         {links !== undefined && links.map((link: any) => (
           <li
             key={link.id}
@@ -32,7 +45,7 @@ function ModelsSidebar (props: any) {
               activeClassName='models-sidebar__link--active'
             >
               <Icon
-                icon='categories/cat-computers'
+                icon={link.icon}
                 alt={link.categoryName[lang]}
               />
               {link.categoryName[lang]}
@@ -51,7 +64,7 @@ function ModelsSidebar (props: any) {
                       activeClassName='models-sidebar__sublink--active'
                     >
                       <Icon
-                        icon='categories/cat-computers'
+                        icon={sublink.icon}
                         alt={sublink.categoryName[lang]}
                       />
                       {sublink.categoryName[lang]}

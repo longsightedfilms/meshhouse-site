@@ -6,7 +6,7 @@ export function getImageLink(url: string): string {
 }
 
 export function getPreviewLink(url: string): string {
-  return `/backend/upload/interactive/${url}`
+  return `http://localhost:7384/backend/upload/interactive/${url}`
 }
 
 export function getDccName(item: any) {
@@ -61,6 +61,7 @@ export function getNestedCategories(links: any[]): any {
         const newLink = {...link, subcategories: []}
         nestedLinks.forEach((nestedLink: any) => {
           if (nestedLink.parentId === link.id) {
+            newLink.modelsCount += nestedLink.modelsCount
             newLink.subcategories.push(nestedLink)
           }
         })

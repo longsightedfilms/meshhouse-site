@@ -6,11 +6,13 @@ interface Icon extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImage
 
 export default function (props: Icon) {
   const path = '/assets/icons/'
-  const {icon, ...elementProps} = props
+  const {icon, className, ...elementProps} = props
+
+  const fullClass = `icon ${className}`
 
   return (
     <img
-      className="icon"
+      className={fullClass}
       src={`${process.env.PUBLIC_URL}${path}${icon}.svg`}
       alt=''
       {...elementProps}

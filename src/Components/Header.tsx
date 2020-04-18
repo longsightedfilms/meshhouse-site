@@ -4,7 +4,6 @@ import { Translate } from "react-localize-redux"
 import { NavLink as RRNavLink } from "react-router-dom"
 import { Alert, Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Nav } from 'reactstrap'
 import LanguageSelector from './LanguageSelector'
-import logo from '../Assets/logo_text.svg'
 
 const Header = (props: any) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,33 +18,31 @@ const Header = (props: any) => {
         expand="lg"
         fixed="top"
       >
-        <NavbarBrand className="d-block d-lg-none"><img src={logo} alt="Meshhouse" /></NavbarBrand>
+        <NavbarBrand>
+          <img src={`${process.env.PUBLIC_URL}/assets/icons/logo-icon.svg`} alt="Meshhouse" />
+          <p>
+            <b>Mesh</b>house
+          </p>
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse className="justify-content-center" isOpen={isOpen} navbar>
-          <Nav className="navbar__left" navbar>
+          <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink exact tag={RRNavLink} to={''}><Translate id="navigation.home" /></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLink} to={'/models'}><Translate id="navigation.models" /></NavLink>
+              <NavLink tag={RRNavLink} to={'/models/all'}><Translate id="navigation.models" /></NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={RRNavLink} to={'/how-to-use-models'}><Translate id="navigation.howto" /></NavLink>
             </NavItem>
-          </Nav>
-          <Nav className="navbar__center" navbar>
-            <NavItem>
-              <NavLink className="navbar-brand"><img src={logo} alt="Meshhouse" /></NavLink>
-            </NavItem>
-          </Nav>
-          <Nav className="navbar__right" navbar>
             <NavItem>
               <NavLink exact tag={RRNavLink} to={'/terms-of-use'}><Translate id="navigation.tos" /></NavLink>
             </NavItem>
             <NavItem>
               <NavLink exact tag={RRNavLink} to={'/application'}><Translate id="navigation.application" /></NavLink>
             </NavItem>
-            <NavItem className="ml-lg-auto">
+            <NavItem>
               <LanguageSelector />
             </NavItem>
           </Nav>

@@ -18,7 +18,7 @@ const routes = [
     component: React.lazy(() => import(/* webpackChunkName: "PageSingleModel" */ './Views/Model'))
   },
   {
-    path: '/models/:category',
+    path: '/models/:category?/:page?',
     component: React.lazy(() => import(/* webpackChunkName: "PageModels" */ './Views/Models'))
   },
   {

@@ -1,5 +1,13 @@
+/* eslint-disable no-template-curly-in-string */
 export default {
-  "size": ["Archive size (with model):", "Вес архива (с моделью):"],
+  "download": {
+    "application": ["Download via Meshhouse", "Скачать через Meshhouse"],
+    "purchase": ["Buy model", "Купить модель"],
+    "texturesTitle": ["Textures:", "Текстуры:"],
+    "texturesButton": ["Download textures", "Скачать текстуры"],
+    "modelTitle": ["Models:", "Модели:"],
+    "modelButton": ["Download model", "Скачать модель"]
+  },
   "date": ["Upload date:", "Дата загрузки:"],
   "polys": ["Polys:", "Полигонов:"],
   "verts": ["Verts:", "Вершин:"],
@@ -25,20 +33,10 @@ export default {
     },
     "none": ["None", "Отсутствует"]
   },
-  "renderers": ["Renderers:", "Рендереры:"],
   "textures": {
-    "title": ["Textures:", "Текстуры:"],
     "included": ["Included", "Присутствуют"],
     "procedural": ["Procedural", "Процедурные"],
   },
-  "links": ["Download links:", "Ссылки на скачивание:"],
-  "linksTexProc": ["Textures not needed", "Текстуры не нужны"],
-  "linksTex": ["Download textures", "Скачать текстуры"],
-  "linksModel": ["Download model", "Скачать модель"],
-  "viewer": {
-    "material": ["Toggle material channel", "Выбрать канал материала"],
-    "rotate": ["Toggle auto-rotate", "Авто-вращение камеры"],
-    "fullscreen": ["Toggle fullscreen", "Полный экран"],
-    "info": ["Model preview may differs from real model", "Предпросмотр модели может отличатся от реальной модели"]
-  }
+  "legalNoticeTitle": ["Legal notice:", "Legal notice:"],
+  "legalNoticeText": ["The intellectual property depicted in this model, including the brand ${brand}, is not affiliated with or endorsed by the original rights holders."]
 }

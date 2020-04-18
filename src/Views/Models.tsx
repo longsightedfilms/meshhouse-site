@@ -1,5 +1,4 @@
 import React from 'react'
-import qs from 'qs'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { fetchModelsFromDB } from '../Store/models/actions'
@@ -7,14 +6,17 @@ import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
 import { Card, CardBody, CardTitle, Input } from 'reactstrap'
 import { Translate } from "react-localize-redux"
-import { trackWindowScroll } from 'react-lazy-load-image-component'
 
-import ModelCard from '../Components/Models/Card'
-import ModelsSidebar from '../Components/Models/Sidebar'
+import ModelCard from 'Components/Models/Card'
+import ModelsSidebar from 'Components/Models/Sidebar'
+import ModelPaginator from 'Components/Models/Paginator'
 
 class Models extends React.PureComponent<any, any> {
   constructor(props: any) {
     super(props)
+    this.state = {
+      totalPages: 0,
+    }
 
     this.handleNameInput = this.handleNameInput.bind(this)
     this.handleDCCChange = this.handleDCCChange.bind(this)
@@ -35,14 +37,16 @@ class Models extends React.PureComponent<any, any> {
   }
 
   componentDidUpdate() {
-    if (this.props.location.state?.categoryId !== this.params.category) {
+    const categoryId = this.props.location.state?.categoryId
+    const page = this.props.match.params.page ?? 0
+    if (categoryId !== this.params.category || page !== this.params.page) {
       this.handleFetchItems()
     }
   }
 
   handleFetchItems() {
     let category = this.props.location.state?.categoryId
-    let page = qs.parse(this.props.location.search.substr(1)).page
+    let page = this.props.match.params.page
     if (page === undefined) {
       page = 0
     }
@@ -50,7 +54,9 @@ class Models extends React.PureComponent<any, any> {
     this.params.category = category
     this.params.page = page
 
-    this.props.fetchModelsFromDB(this.params).catch(() => { })
+    this.props.fetchModelsFromDB(this.params).then(() => {
+      this.setState({ totalPages: Math.ceil(this.props.pageData.modelsLength / 50)})
+    }).catch(() => { })
     document.title = this.props.translate('pages.models.title') + ` - Meshhouse`
   }
 
@@ -76,13 +82,13 @@ class Models extends React.PureComponent<any, any> {
     const isLoaded = this.props.loaded
     const page = this.props.pageData
     const lang = this.props.activeLanguage !== undefined ? this.props.activeLanguage.code : "en"
-    const category = isLoaded === true && this.props.match.params.category !== undefined ? page.categories.find((item: any) => {
+    const category = isLoaded === true && this.props.match.params.category !== 'all' ? page.categories.find((item: any) => {
       return item.categorySlug === this.props.match.params.category
     }).categoryName[lang] : undefined
 
     return (
       <div className='models-view'>
-        <ModelsSidebar links={page.categories}/>
+        <ModelsSidebar links={page.categories} modelsCount={this.props.pageData.modelsLength}/>
         <main className="models-container">
           <div className="models-filter">
             {category !== undefined &&
@@ -127,7 +133,7 @@ class Models extends React.PureComponent<any, any> {
           <div className="models-grid">
             {isLoaded && page.models !== undefined && page.models.length > 0 &&
               page.models.map((item: any) =>
-                <ModelCard key={item.id} item={item} scrollPosition={this.props.scrollPosition} />
+                <ModelCard key={item.id} item={item} />
               )}
             {isLoaded && page.models !== undefined && page.models.length === 0 &&
               <Card>
@@ -137,6 +143,11 @@ class Models extends React.PureComponent<any, any> {
               </Card>
             }
           </div>
+          {this.state.totalPages > 1 &&
+            <div className="models-pagination">
+              <ModelPaginator match={this.props.match} totalPages={this.state.totalPages}/>
+            </div>
+          }
         </main>
       </div>
     )
@@ -146,7 +157,6 @@ class Models extends React.PureComponent<any, any> {
 const mapStateToProps = (state: any) => ({ loaded: state.loaded, pageData: state.models })
 
 export default compose<any>(
-  trackWindowScroll,
   withLocalize,
   connect(mapStateToProps, { fetchModelsFromDB })
 )(Models)

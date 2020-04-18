@@ -1,26 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchSingleModel } from 'Store/models/actions'
-import { Jumbotron, Container, Row, Col, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button } from 'reactstrap'
-import { getPreviewLink, getImageLink, getDccName, getStringedArray } from 'Functions/Helpers'
+import { UncontrolledButtonDropdown, DropdownMenu, DropdownItem, DropdownToggle, Button, Table } from 'reactstrap'
+import { getPreviewLink, getImageLink, getDccName } from 'Functions/Helpers'
 import { format } from 'date-fns'
 import { Translate } from "react-localize-redux"
+import LazyLoad from 'react-lazyload'
 import '@meshhouse/model-viewer'
+import Carousel from 'nuka-carousel'
 import Icon from 'Components/UI/Icon'
+import Badge from 'Components/UI/Badge'
 
-import logoIcon from '../Assets/logo_icon.svg'
-import logoText from '../Assets/logo_text.svg'
 import hdri from '../Assets/images/hdri/colorful_studio_1k.hdr'
-import classnames from 'classnames'
 
 class Model extends React.PureComponent<any, any> {
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      activeTab: 0
-    }
-  }
-
   componentDidMount() {
     const slug = this.props.match.params.slug
     this.props.fetchSingleModel(slug).then(() => {
@@ -28,151 +21,155 @@ class Model extends React.PureComponent<any, any> {
     }).catch(() => {})
   }
 
-  handleTabToggle(index: number) {
-    this.setState({ activeTab: index })
-  }
-
   render() {
     let model = this.props.pageData !== undefined ? this.props.pageData[0] : {}
     return (
-      <React.Fragment>
+      <>
         {this.props.pageData !== undefined &&
-        <div>
-          <Jumbotron className="jumbotron-model" fluid>
-            <React.Fragment>
-              <h1>{model.name}</h1>
-              <img className="jumbotron-cover" src={getImageLink(model.variations[0].thumbnail)} alt={model.name} />
-              <img className="jumbotron-cover jumbotron-cover_lg" src={getImageLink(model.variations[0].thumbnail)} alt={model.name} />
-            </React.Fragment>
-          </Jumbotron>
-          <Container>
-            <Nav tabs>
-              {model.variations.map((item: any, index: number) =>
-                <NavItem key={index}>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === 0 }, "model-view__nav-link")}
-                    onClick={() => { this.handleTabToggle(0) }}
+        <>
+          <Carousel
+            className='models-slider'
+            initialSlideHeight={960}
+            dragging={false}
+          >
+            {model.images !== undefined && model.images.map((image: string, idx: number) => (
+              <div
+                className='slide-inner'
+                key={`slide-${idx}`}
+              >
+                <LazyLoad>
+                  <img src={getImageLink(image)} alt={model.name} />
+                </LazyLoad>
+              </div>
+            ))}
+            <div className='slide-inner'>
+              <LazyLoad>
+                <model-viewer
+                  model={getPreviewLink(model.preview)}
+                  hdri={hdri}
+                  modeltitle={model.name}
+                  author="Long-Sighted Films"
+                  authorlink="https://longsightedfilms.com"
+                  autohide={true}
+                  thumbnail={getImageLink(model.thumbnail)}
+                >
+                  <span slot="loader">
+                    <img src={`${process.env.PUBLIC_URL}/assets/icons/logo-icon.svg`} alt="Meshhouse"/>
+                  </span>
+                  <span slot="logo">
+                    <img src={`${process.env.PUBLIC_URL}/assets/icons/logo-icon.svg`} alt="Meshhouse"/>
+                  </span>
+                </model-viewer>
+              </LazyLoad>
+            </div>
+          </Carousel>
+          <header className="models-header">
+            <h1>{model.name}</h1>
+            <div className="buttons">
+              <UncontrolledButtonDropdown>
+                <DropdownToggle
+                  color="primary"
+                  size="lg"
+                  caret
+                >
+                  <Translate id="pages.model.download.modelButton" />
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem header>
+                    <Translate id="pages.model.download.texturesTitle" />
+                  </DropdownItem>
+                  <DropdownItem
+                    href={model.links.textures}
+                    disabled={model.links.textures === null}
                   >
-                    <Icon icon={`programs/${item.dcc}`} />
-                    {`${getDccName(item)} ${item.dccVersion}`}
-                  </NavLink>
-                </NavItem>
-              )}
-            </Nav>
-          </Container>
-          <TabContent activeTab={this.state.activeTab}>
-            {model.variations.map((item: any, index: number) =>
-              <TabPane className="model-single" key={index} tabId={index}>
-                <Container>
-                  <Row>
-                    <Col lg={7}>
-                      <model-viewer
-                        model={getPreviewLink(model.preview)}
-                        hdri={hdri}
-                        modeltitle={model.name}
-                        author="Long-Sighted Films"
-                        authorlink="https://longsightedfilms.com"
-                        autohide={true}
-                        thumbnail={getImageLink(model.variations[0].thumbnail)}
-                      >
-                        <span slot="loader">
-                          <img src={logoIcon} alt="Meshhouse"/>
-                        </span>
-                        <span slot="logo">
-                          <img src={logoText} alt="Meshhouse"/>
-                        </span>
-                      </model-viewer>
-                    </Col>
-                    <Col lg={5}>
-                      <Table bordered>
-                        <tbody>
-                          <tr>
-                            <th><Translate id="pages.model.size" /></th>
-                            <td>{item.size}</td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.date" /></th>
-                            <td>{format(model.date, 'dd.MM.yyyy')}</td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.polys" /></th>
-                            <td>{item.polys}</td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.verts" /></th>
-                            <td>{item.verts}</td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.hairFur.title" /></th>
-                            <td><Translate id={`pages.model.hairFur.${item.hairFur}`} /></td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.morpher.title" /></th>
-                            <td><Translate id={`pages.model.morpher.${String(item.morpher)}`} /></td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.skinning.title" /></th>
-                            <td>{item.skinning === 'none' &&
-                              <Translate id={`pages.model.skinning.${item.skinning}`} />}
-                            </td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.renderers" /></th>
-                            <td>{getStringedArray(item.renderers)}</td>
-                          </tr>
-                          <tr>
-                            <th><Translate id="pages.model.textures.title" /></th>
-                            <td><Translate id={`pages.model.textures.${item.textures}`} /></td>
-                          </tr>
-                          <tr>
-                            <th colSpan={2} className="text-center bg-secondary text-light"><Translate id="pages.model.links" /></th>
-                          </tr>
-                          <tr>
-                            <th colSpan={2}>
-                              {item.links.textures === null &&
-                                <Button
-                                  color="primary"
-                                  block
-                                  disabled
-                                >
-                                  <Translate id="pages.model.linksTexProc" />
-                                </Button>
-                              }
-                              {item.links.textures !== null &&
-                                <Button
-                                  tag="a"
-                                  color="primary"
-                                  href={item.links.textures}
-                                  block
-                                >
-                                  <Translate id="pages.model.linksTex" />
-                                </Button>
-                              }
-                            </th>
-                          </tr>
-                          <tr>
-                            <th colSpan={2}>
-                              <Button
-                                tag="a"
-                                color="primary"
-                                href={item.links.model}
-                                block
-                              >
-                                <Translate id="pages.model.linksModel" />
-                              </Button>
-                            </th>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </Col>
-                  </Row>
-                </Container>
-              </TabPane>
-            )}
-          </TabContent>
-        </div>
+                    <Translate id="pages.model.download.texturesButton" />
+                  </DropdownItem>
+                  <DropdownItem header>
+                    <Translate id="pages.model.download.modelTitle" />
+                  </DropdownItem>
+                  {model.links.model !== undefined && model.links.model.map((item: any, idx: number) => (
+                    <DropdownItem key={idx} href={item.link}>
+                      <Icon icon={`programs/${item.dcc}`} />
+                      {getDccName(item)} {item.dccVersion} - {item.renderer} ({item.size})
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </UncontrolledButtonDropdown>
+
+              <Button
+                id="download-app"
+                tag="a"
+                color="primary"
+                size="lg"
+                href={`meshhouse://install/${model.id}`}
+              >
+                <Icon
+                  className="mr-2"
+                  icon="logo-icon"
+                />
+                <Translate id="pages.model.download.application" />
+              </Button>
+            </div>
+          </header>
+          <main className="models-description">
+            <div className="description">
+              {model.brand !== undefined &&
+                <div className="legal">
+                  <b><Translate id="pages.model.legalNoticeTitle" /></b>
+                  <p><Translate id="pages.model.legalNoticeText" data={{ brand: model.brand }} /></p>
+                </div>
+              }
+              {model.tags !== undefined &&
+                <>
+                <h3>Tags</h3>
+                <div className="tags-container">
+                  {model.tags.map((tag: any, idx: number) => (
+                    <Badge key={`tag-${idx}`}>{tag}</Badge>
+                  ))}
+                </div>
+                </>
+              }
+            </div>
+            <div className="info">
+              <Table bordered>
+                <tbody>
+                  <tr>
+                    <th><Translate id="pages.model.date" /></th>
+                    <td>{format(model.date, 'dd.MM.yyyy')}</td>
+                  </tr>
+                  <tr>
+                    <th><Translate id="pages.model.polys" /></th>
+                    <td>{model.info.polys}</td>
+                  </tr>
+                  <tr>
+                    <th><Translate id="pages.model.verts" /></th>
+                    <td>{model.info.verts}</td>
+                  </tr>
+                  <tr>
+                    <th><Translate id="pages.model.hairFur.title" /></th>
+                    <td><Translate id={`pages.model.hairFur.${model.info.hairFur}`} /></td>
+                  </tr>
+                  <tr>
+                    <th><Translate id="pages.model.morpher.title" /></th>
+                    <td><Translate id={`pages.model.morpher.${String(model.info.morpher)}`} /></td>
+                  </tr>
+                  <tr>
+                    <th><Translate id="pages.model.skinning.title" /></th>
+                    <td>{model.info.skinning === 'none' &&
+                      <Translate id={`pages.model.skinning.${model.info.skinning}`} />}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><Translate id="pages.model.download.texturesTitle" /></th>
+                    <td><Translate id={`pages.model.textures.${model.info.textures}`} /></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+          </main>
+        </>
         }
-      </React.Fragment>
+      </>
     )
   }
 }
