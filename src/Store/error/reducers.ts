@@ -16,10 +16,7 @@ export function errorReducer(
 ): ErrorState {
   switch (action.type) {
     case SET_ERROR_STATUS:
-      return {
-        visible: action.visible,
-        message: action.message
-      }
+      return {...action.payload }
     default:
       return state;
   }

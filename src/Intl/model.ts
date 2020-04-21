@@ -37,6 +37,6 @@ export default {
     "included": ["Included", "Присутствуют"],
     "procedural": ["Procedural", "Процедурные"],
   },
-  "legalNoticeTitle": ["Legal notice:", "Legal notice:"],
+  "legalNoticeTitle": ["Legal notice", "Legal notice"],
   "legalNoticeText": ["The intellectual property depicted in this model, including the brand ${brand}, is not affiliated with or endorsed by the original rights holders."]
 }

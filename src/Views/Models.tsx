@@ -1,7 +1,6 @@
 import React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { fetchModelsFromDB } from '../Store/models/actions'
 import { renderToStaticMarkup } from "react-dom/server"
 import { withLocalize } from "react-localize-redux"
 import { Card, CardBody, CardTitle, Input } from 'reactstrap'
@@ -54,9 +53,7 @@ class Models extends React.PureComponent<any, any> {
     this.params.category = category
     this.params.page = page
 
-    this.props.fetchModelsFromDB(this.params).then(() => {
-      this.setState({ totalPages: Math.ceil(this.props.pageData.modelsLength / 50)})
-    }).catch(() => { })
+    this.props.onFetchModels(this.params)
     document.title = this.props.translate('pages.models.title') + ` - Meshhouse`
   }
 
@@ -79,10 +76,9 @@ class Models extends React.PureComponent<any, any> {
   }
 
   render() {
-    const isLoaded = this.props.loaded
     const page = this.props.pageData
     const lang = this.props.activeLanguage !== undefined ? this.props.activeLanguage.code : "en"
-    const category = isLoaded === true && this.props.match.params.category !== 'all' ? page.categories.find((item: any) => {
+    const category = page.categories !== undefined && this.props.match.params.category !== 'all' ? page.categories.find((item: any) => {
       return item.categorySlug === this.props.match.params.category
     }).categoryName[lang] : undefined
 
@@ -131,11 +127,11 @@ class Models extends React.PureComponent<any, any> {
             </Input>
           </div>
           <div className="models-grid">
-            {isLoaded && page.models !== undefined && page.models.length > 0 &&
+            {page.models !== undefined && page.models.length > 0 &&
               page.models.map((item: any) =>
                 <ModelCard key={item.id} item={item} />
               )}
-            {isLoaded && page.models !== undefined && page.models.length === 0 &&
+            {page.models !== undefined && page.models.length === 0 &&
               <Card>
                 <CardBody>
                   <CardTitle tag="h1"><Translate id="pages.models.notFound" options={{ renderToStaticMarkup, renderInnerHtml: true }} /></CardTitle>
@@ -143,9 +139,9 @@ class Models extends React.PureComponent<any, any> {
               </Card>
             }
           </div>
-          {this.state.totalPages > 1 &&
+          {this.props.pageData.totalPages > 1 &&
             <div className="models-pagination">
-              <ModelPaginator match={this.props.match} totalPages={this.state.totalPages}/>
+              <ModelPaginator match={this.props.match} totalPages={this.props.pageData.totalPages}/>
             </div>
           }
         </main>
@@ -154,9 +150,20 @@ class Models extends React.PureComponent<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ loaded: state.loaded, pageData: state.models })
+const mapStateToProps = (state: any) => (
+  {
+    loaded: state.loaded,
+    pageData: state.models
+  }
+)
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onFetchModels: (params: any) => dispatch({ type: "GET_MODELS_DATA", payload: params })
+  };
+};
 
 export default compose<any>(
   withLocalize,
-  connect(mapStateToProps, { fetchModelsFromDB })
+  connect(mapStateToProps, mapDispatchToProps)
 )(Models)

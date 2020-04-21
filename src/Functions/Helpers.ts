@@ -1,5 +1,6 @@
 import axios from 'axios'
 import uniqid from 'uniqid'
+import nprogress from 'nprogress'
 
 export function getImageLink(url: string): string {
   return `/backend/upload/thumbnails/${url}`
@@ -37,6 +38,7 @@ export function getStringedArray(array: string[]): string  {
 }
 
 export function fetchAPI(method: string, params: any): Promise<any> {
+  nprogress.start()
   return axios({
     method: "POST",
     url: `/backend/api/v1`,
@@ -47,6 +49,8 @@ export function fetchAPI(method: string, params: any): Promise<any> {
       "id": uniqid()
     },
     responseType: "json"
+  }).finally(() => {
+    nprogress.done()
   })
 }
 

@@ -11,7 +11,7 @@ class NRoute extends React.Component<any, any> {
 
   componentDidMount() {
     nprogress.done()
-    this.props.setErrorStatusDispatch(false, '')
+    //this.props.setErrorStatusDispatch(false, '')
   }
 
   render() {
