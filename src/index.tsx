@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from "react-router-dom"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faImages } from '@fortawesome/free-regular-svg-icons'
-import { faCalendarAlt, faLanguage, faExpand, faRedo } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faLanguage, faExpand, faRedo, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { faApple, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons'
 import App from './App'
 import { Provider } from 'react-redux'
@@ -13,7 +13,7 @@ import * as serviceWorker from './serviceWorker'
 
 const store = configureStore()
 
-library.add(faCalendarAlt, faLanguage, faApple, faLinux, faWindows, faExpand, faRedo, faImages)
+library.add(faCalendarAlt, faLanguage, faApple, faLinux, faWindows, faExpand, faRedo, faImages, faSun, faMoon)
 
 ReactDOM.render(
   <Provider store={store}>

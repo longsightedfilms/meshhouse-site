@@ -4,6 +4,7 @@ import { Translate } from "react-localize-redux"
 import { NavLink as RRNavLink } from "react-router-dom"
 import { Alert, Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Nav } from 'reactstrap'
 import LanguageSelector from './LanguageSelector'
+import ThemeSelector from './ThemeSelector'
 
 const Header = (props: any) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,6 +45,9 @@ const Header = (props: any) => {
             </NavItem>
             <NavItem>
               <LanguageSelector />
+            </NavItem>
+            <NavItem>
+              <ThemeSelector />
             </NavItem>
           </Nav>
         </Collapse>

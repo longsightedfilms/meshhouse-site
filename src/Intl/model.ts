@@ -1,7 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 export default {
   "download": {
-    "application": ["Download via Meshhouse", "Скачать через Meshhouse"],
+    "application": ["Install", "Установить"],
     "purchase": ["Buy model", "Купить модель"],
     "texturesTitle": ["Textures:", "Текстуры:"],
     "texturesButton": ["Download textures", "Скачать текстуры"],

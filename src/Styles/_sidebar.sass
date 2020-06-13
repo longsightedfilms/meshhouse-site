@@ -1,15 +1,24 @@
 .models-sidebar
+  position: fixed
+  background-color: var(--block-color)
+  top: 72px
+  left: 0
+  width: 400px
   padding: 0.5rem 0
   height: calc(100vh - 72px)
+  &__nav
+    height: calc(100vh - 138px)
+    overflow-y: auto
   &__header
     font-size: 2rem
     display: block
     margin-left: 0.5rem
     margin-bottom: 0.5rem
+    color: var(--text-color)
   &__link, &__sublink
     display: flex
     align-items: center
-    color: #000000
+    color: var(--text-color)
     font-size: 1.1rem
     font-weight: 600
     border: 3px solid rgba(0,0,0,0)
